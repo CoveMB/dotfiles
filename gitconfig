@@ -47,5 +47,6 @@
 [branch "master"]
   mergeoptions = --no-edit
 [user]
+
 	email = bmarquiscom@gmail.com
-	name = Benjamin
+	name = Benjamin Marquis

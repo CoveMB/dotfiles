@@ -1,16 +1,31 @@
 {
-  "installed_packages":
-  [
-    "AdvancedNewFile",
-    "All Autocomplete",
-    "Babel",
-    "Emmet",
-    "ERB Snippets",
-    "Git",
-    "GitGutter",
-    "Package Control",
-    "SCSS",
-    "SublimeLinter",
-    "SublimeLinter-rubocop"
-  ]
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AdvancedNewFile",
+		"All Autocomplete",
+		"Babel",
+		"BracketHighlighter",
+		"CSS Extended Completions",
+		"Emmet",
+		"ERB Snippets",
+		"ESLint",
+		"Git",
+		"GitGutter",
+		"JavaScript & NodeJS Snippets",
+		"JavaScript Enhancements",
+		"JsPrettier",
+		"Package Control",
+		"SCSS",
+		"SideBarEnhancements",
+		"Solarized Color Scheme",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"SublimeLinter-rubocop",
+		"TerminalView",
+		"Theme - Solarized Space"
+	]
 }

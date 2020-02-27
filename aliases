@@ -8,3 +8,21 @@ alias serve='ruby -run -e httpd . -p 8000'  # Or python -m SimpleHTTPServer :)
 
 alias l="ls -al"
 alias open="xdg-open"
+
+#git Aliases
+alias gcod='git checkout dev'
+alias gcob='git checkout -b'
+alias gaa="git add *"
+alias gpo="git push origin"
+alias gbd='git branch -d'
+alias gclean='git reset --hard && git clean -df'
+alias gpod='git pull origin dev'
+
+#Docker aliases
+alias dcu="docker-compose up"
+alias dcd="docker-compose down"
+alias dceab="docker-compose exec app bash"
+alias dsp="docker system prune"
+alias dspa="docker system prune -a"
+alias dspv="docker system prune -v"
+alias dspav="docker system prune -a -v"

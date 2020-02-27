@@ -14,8 +14,6 @@
 		".sass-cache",
 		".asset-cache",
 		"build",
-		"node_modules",
-		"dist",
 		"public/packs",
 		"coverage"
 	],
@@ -24,7 +22,7 @@
 	[
 		"subpixel_antialias"
 	],
-	"font_size": 13,
+	"font_size": 16,
 	"font_weigth": 500,
 	"highlight_modified_tabs": true,
 	"hot_exit": false,

@@ -12,17 +12,21 @@ alias open="xdg-open"
 #git Aliases
 alias gcod='git checkout dev'
 alias gcob='git checkout -b'
-alias gaa="git add *"
-alias gpo="git push origin"
+alias gaa="git add ."
 alias gbd='git branch -d'
 alias gclean='git reset --hard && git clean -df'
-alias gpod='git pull origin dev'
+alias gpullo="git pull origin"
+alias gpusho="git push origin"
 
 #Docker aliases
-alias dcu="docker-compose up"
-alias dcd="docker-compose down"
-alias dceab="docker-compose exec app bash"
-alias dsp="docker system prune"
-alias dspa="docker system prune -a"
-alias dspv="docker system prune -v"
-alias dspav="docker system prune -a -v"
+alias dcd='docker-compose down'
+alias dceab='docker-compose exec app bash'
+alias dcu='docker-compose up'
+alias dcud='docker-compose up -d'
+alias dcufr="docker-compose up --build --force-recreate"
+alias dsp='docker system prune -f'
+alias dspa='docker system prune -a -f'
+alias dspav='docker syteme prune -a -f --volumes'
+alias dspv='docker syteme prune -f --volumes'
+alias dcla="docker-compose logs -f app"
+alias dcecb="docker-compose exec client bash"

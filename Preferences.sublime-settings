@@ -28,6 +28,7 @@
 	"hot_exit": false,
 	"ignored_packages":
 	[
+		"BracketHighlighter",
 		"Vintage"
 	],
 	"remember_open_files": false,

@@ -46,10 +46,7 @@
     ],
     "padded-blocks": [
       "warn",
-      "always",
-      {
-        "switches": "never"
-      }
+      "always"
     ],
     "padding-line-between-statements": [
       "warn",

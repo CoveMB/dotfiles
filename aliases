@@ -15,8 +15,8 @@ alias gcob='git checkout -b'
 alias gaa="git add ."
 alias gbd='git branch -d'
 alias gclean='git reset --hard && git clean -df'
-alias gpullo="git pull origin"
-alias gpusho="git push origin"
+alias gplo="git pull origin"
+alias gpso="git push origin"
 
 #Docker aliases
 alias dcd='docker-compose down'
@@ -29,4 +29,12 @@ alias dspa='docker system prune -a -f'
 alias dspav='docker syteme prune -a -f --volumes'
 alias dspv='docker syteme prune -f --volumes'
 alias dcla="docker-compose logs -f app"
+dclc='docker-compose logs -f client'
 alias dcecb="docker-compose exec client bash"
+alias dsr="docker container stop $(docker container list -a -q) && docker container rm $(docker container list -a -q)"
+
+#Navigation aliases
+alias goac="cd ~/code/BjMrq/Active"
+alias goar="cd ~/code/BjMrq/Archive"
+alias gobo="cd ~/home/bjmrq/code/BjMrq/Boilerplates"
+alias gosd="cd ~/code/Softwares\&Drivers"

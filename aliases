@@ -17,8 +17,11 @@ alias gbd='git branch -d'
 alias gclean='git reset --hard && git clean -df'
 alias gplo="git pull origin"
 alias gpso="git push origin"
+alias gplb="git pull bjmrq"
+alias gpsb="git push bjmrq"
 
 #Docker aliases
+alias dc='docker-compose'
 alias dcd='docker-compose down'
 alias dceab='docker-compose exec app bash'
 alias dcu='docker-compose up'
@@ -36,5 +39,9 @@ alias dsr="docker container stop $(docker container list -a -q) && docker contai
 #Navigation aliases
 alias goac="cd ~/code/BjMrq/Active"
 alias goar="cd ~/code/BjMrq/Archive"
-alias gobo="cd ~/home/bjmrq/code/BjMrq/Boilerplates"
+alias gobo="cd ~/code/BjMrq/Boilerplates"
+alias gonb="cd ~/code/Notebooks"
 alias gosd="cd ~/code/Softwares\&Drivers"
+
+#Other
+alias gnstart="cd ~/code/Softwares\&Drivers/Ngrok && ./ngrok http 80"

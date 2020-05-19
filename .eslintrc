@@ -21,7 +21,12 @@
       "warn",
       "single"
     ],
-    // Pading and spacing
+    // Spacing
+    "space-in-parens": "warn",
+    "keyword-spacing": "warn",
+    "no-trailing-spaces": "warn",
+    "space-before-blocks": "warn",
+    "space-before-function-paren": "warn",
     "key-spacing": [
       "warn",
       {
@@ -38,6 +43,17 @@
         "ignoreEOLComments": true
       }
     ],
+    // Padding
+    "lines-around-comment": [
+      "warn",
+      {
+        "beforeBlockComment": true,
+        "beforeLineComment": true
+      }
+    ],
+    "eol-last": "warn",
+    "no-empty": "warn",
+    "no-multiple-empty-lines": "warn",
     "newline-per-chained-call": [
       "warn",
       {
@@ -54,6 +70,7 @@
         "blankLine": "always",
         "prev": "*",
         "next": [
+          "cjs-export",
           "return",
           "if"
         ]
@@ -100,7 +117,10 @@
     ],
     "indent": [
       "warn",
-      2
+      2,
+      {
+        "SwitchCase": 1
+      }
     ],
     "comma-spacing": [
       "warn",
@@ -119,11 +139,13 @@
       {
         "ObjectPattern": {
           "multiline": true,
-          "minProperties": 3,
+          "minProperties": 4,
+          "consistent": true
         },
         "ObjectExpression": {
           "multiline": true,
           "minProperties": 2,
+          "consistent": true
         },
         "ImportDeclaration": "never",
         "ExportDeclaration": "never"

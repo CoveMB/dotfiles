@@ -57,6 +57,9 @@ else
     echo "Found fonts dir $fonts_dir"
 fi
 
+# install xclip
+apt-get install xclip
+
 for type in Bold Light Medium Regular Retina; do
     file_path="${HOME}/.local/share/fonts/FiraCode-${type}.ttf"
     file_url="https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-${type}.ttf?raw=true"
@@ -72,17 +75,25 @@ echo "fc-cache -f"
 fc-cache -f
 
 # Sublime Text
-if [[ ! `uname` =~ "darwin" ]]; then
-  SUBL_PATH=~/.config/sublime-text-3
-else
-  SUBL_PATH=~/Library/Application\ Support/Sublime\ Text\ 3
-fi
-mkdir -p $SUBL_PATH/Packages/User $SUBL_PATH/Installed\ Packages
-backup "$SUBL_PATH/Packages/User/Preferences.sublime-settings"
-curl -k https://sublime.wbond.net/Package%20Control.sublime-package > $SUBL_PATH/Installed\ Packages/Package\ Control.sublime-package
-ln -s $PWD/Preferences.sublime-settings $SUBL_PATH/Packages/User/Preferences.sublime-settings
-ln -s $PWD/Package\ Control.sublime-settings $SUBL_PATH/Packages/User/Package\ Control.sublime-settings
-ln -s $PWD/SublimeLinter.sublime-settings $SUBL_PATH/Packages/User/SublimeLinter.sublime-settings
+# if [[ ! `uname` =~ "darwin" ]]; then
+#   SUBL_PATH=~/.config/sublime-text-3
+# else
+#   SUBL_PATH=~/Library/Application\ Support/Sublime\ Text\ 3
+# fi
+# mkdir -p $SUBL_PATH/Packages/User $SUBL_PATH/Installed\ Packages
+# backup "$SUBL_PATH/Packages/User/Preferences.sublime-settings"
+# curl -k https://sublime.wbond.net/Package%20Control.sublime-package > $SUBL_PATH/Installed\ Packages/Package\ Control.sublime-package
+# ln -s $PWD/Preferences.sublime-settings $SUBL_PATH/Packages/User/Preferences.sublime-settings
+# ln -s $PWD/Package\ Control.sublime-settings $SUBL_PATH/Packages/User/Package\ Control.sublime-settings
+# ln -s $PWD/SublimeLinter.sublime-settings $SUBL_PATH/Packages/User/SublimeLinter.sublime-settings
+
+# Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+# Docker-compose
+curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
 
 zsh ~/.zshrc
 

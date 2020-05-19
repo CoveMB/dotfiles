@@ -34,3 +34,4 @@ export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
 export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
 
 CASE_SENSITIVE="false"
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)

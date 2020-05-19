@@ -6,8 +6,11 @@ alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/download
 # Quickly serve the current directory as HTTP
 alias serve='ruby -run -e httpd . -p 8000'  # Or python -m SimpleHTTPServer :)
 
+# Utilitaries
 alias l="ls -al"
 alias open="xdg-open"
+alias clip="xclip -selection clip"
+alias npmd="npm install --only=dev"
 
 #git Aliases
 alias gcod="git checkout dev"
@@ -35,7 +38,31 @@ alias dsp="docker system prune -f"
 alias dspa="docker system prune -a -f"
 alias dspav="docker syteme prune -a -f --volumes"
 alias dspv="docker syteme prune -f --volumes"
-alias dsr="docker container stop $(docker container list -a -q) && docker container rm $(docker container list -a -q)"
+alias drmdang="docker rmi -f $(docker images --quiet --filter 'dangling=true')"
+alias dstrm="dst && drm"
+
+# Docker functions
+dst() { docker stop $(docker ps -a -q); }
+drm() { docker rm $(docker ps -a -q); }
+
+# Kubernetes aliases
+alias mkstop="microk8s stop"
+alias mkreset="microk8s.reset"
+alias mkstart="microk8s start"
+alias mk="microk8s kubectl"
+alias mkc="microk8s config"
+alias mka="microk8s kubectl apply -f"
+alias mkp="microk8s kubectl get pods"
+alias mkl="microk8s kubectl logs"
+alias mkga="microk8s kubectl get all"
+alias mke="microk8s kubectl exec -it"
+alias k="kubectl"
+alias ks="kubectl create secret generic"
+alias ka="kubectl apply -f"
+alias kp="kubectl get pods"
+alias kl="kubectl logs"
+alias ke="kubectl exec -it"
+alias kga="kubectl get all"
 
 #Navigation aliases
 alias goac="cd ~/code/BjMrq/Active"
@@ -47,3 +74,8 @@ alias godo="cd ~/code/BjMrq/Dockerfiles"
 
 #Other
 alias ngstart="cd ~/code/Softwares\&Drivers/Ngrok && ./ngrok http 80"
+
+# Functions
+code64 () {
+  echo -n "$1" | base64 | clip
+}

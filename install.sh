@@ -1,3 +1,14 @@
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# Node
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt update && sudo apt install yarn
+
 backup() {
   target=$1
   if [ -e "$target" ]; then           # Does the config file already exist?
@@ -47,6 +58,8 @@ else
   echo "export BUNDLER_EDITOR=\"${bundler_editor} -a\"" >> zshrc
 fi
 
+zsh ~/.zshrc
+
 
 # Install Fira Code font
 fonts_dir="${HOME}/.local/share/fonts"
@@ -93,8 +106,27 @@ sh get-docker.sh
 # Docker-compose
 curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+sudo usermod -aG docker ${USER}
+su -s ${USER}
 
 
-zsh ~/.zshrc
+# Google Cloud
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+sudo apt-get install apt-transport-https ca-certificates gnupg
+sudo apt-get update && sudo apt-get install google-cloud-sdk
+sudo apt-get install google-cloud-sdk-app-engine-java
+gcloud init
+gcloud components install kubectl
+source <(kubectl completion zsh)
+echo 'alias k=kubectl' >>~/.zshrc
+echo 'complete -F __start_kubectl k' >>~/.zshrc
+
+# # Folder structure
+mkdir -p ~/Code/BjMrq/Active
+mkdir -p ~/Code/BjMrq/Archive
+mkdir -p ~/Code/BjMrq/Boilerplates
+mkdir -p ~/Code/Notebooks
+mkdir -p ~/Code/Softwares\&Drivers
+mkdir -p ~/Code/BjMrq/Dockerfiles
 
 echo "👌  Carry on with git setup!"

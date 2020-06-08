@@ -35,3 +35,7 @@ export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
 
 CASE_SENSITIVE="false"
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"
+alias k=kubectl
+complete -F __start_kubectl k
+export BUNDLER_EDITOR="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' -a"

@@ -12,7 +12,7 @@ alias open="xdg-open"
 alias clip="xclip -selection clip"
 alias npmd="npm install --only=dev"
 
-#git Aliases
+# git Aliases
 alias gcod="git checkout dev"
 alias gcob="git checkout -b"
 alias gaa="git add ."
@@ -38,33 +38,26 @@ alias dsp="docker system prune -f"
 alias dspa="docker system prune -a -f"
 alias dspav="docker syteme prune -a -f --volumes"
 alias dspv="docker syteme prune -f --volumes"
-alias drmdang="docker rmi -f $(docker images --quiet --filter 'dangling=true')"
 alias dstrm="dst && drm"
 
 # Docker functions
 dst() { docker stop $(docker ps -a -q); }
 drm() { docker rm $(docker ps -a -q); }
+drmdang() { docker rmi -f $(docker images --quiet --filter 'dangling=true') }
+
+# Gcloud aliases
+alias ggc="gcloud container clusters get-credentials"
 
 # Kubernetes aliases
-alias mkstop="microk8s stop"
-alias mkreset="microk8s.reset"
-alias mkstart="microk8s start"
-alias mk="microk8s kubectl"
-alias mkc="microk8s config"
-alias mka="microk8s kubectl apply -f"
-alias mkp="microk8s kubectl get pods"
-alias mkl="microk8s kubectl logs"
-alias mkga="microk8s kubectl get all"
-alias mke="microk8s kubectl exec -it"
 alias k="kubectl"
 alias ks="kubectl create secret generic"
 alias ka="kubectl apply -f"
-alias kp="kubectl get pods"
+alias kgp="kubectl get pods"
 alias kl="kubectl logs"
 alias ke="kubectl exec -it"
 alias kga="kubectl get all"
 
-#Navigation aliases
+# Navigation aliases
 alias goac="cd ~/code/BjMrq/Active"
 alias goar="cd ~/code/BjMrq/Archive"
 alias gobo="cd ~/code/BjMrq/Boilerplates"
@@ -72,7 +65,7 @@ alias gonb="cd ~/code/Notebooks"
 alias gosd="cd ~/code/Softwares\&Drivers"
 alias godo="cd ~/code/BjMrq/Dockerfiles"
 
-#Other
+# Other
 alias ngstart="cd ~/code/Softwares\&Drivers/Ngrok && ./ngrok http 80"
 
 # Functions

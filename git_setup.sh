@@ -1,3 +1,10 @@
+sudo apt install -y git zsh curl jq apt-transport-https
+
+mkdir -p ~/.ssh && ssh-keygen -t ed25519 -o -a 100 -f ~/.ssh/id_ed25519 -C "bmarquiscom@gmail.com"
+
+echo "Add the following to github ssh keys"
+cat ~/.ssh/id_ed25519.pub
+
 echo "Type in your first and last name (no accent or special characters - e.g. 'ç'): "
 read full_name
 

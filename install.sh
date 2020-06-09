@@ -108,6 +108,8 @@ curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compo
 chmod +x /usr/local/bin/docker-compose
 sudo usermod -aG docker ${USER}
 su -s ${USER}
+sudo curl -L https://raw.githubusercontent.com/docker/compose/1.26.0/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+
 
 
 # Google Cloud

@@ -46,7 +46,9 @@ drm() { docker rm $(docker ps -a -q); }
 drmdang() { docker rmi -f $(docker images --quiet --filter 'dangling=true') }
 
 # Gcloud aliases
+alias gc="gcloud config"
 alias ggc="gcloud container clusters get-credentials"
+alias gsp="gcloud config set project"
 
 # Kubernetes aliases
 alias k="kubectl"

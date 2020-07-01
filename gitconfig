@@ -46,7 +46,9 @@
 
 [branch "master"]
   mergeoptions = --no-edit
-[user]
 
+[user]
 	email = bmarquiscom@gmail.com
 	name = Benjamin
+[credential]
+	helper = cache

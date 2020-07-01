@@ -30,6 +30,7 @@ alias dcd="docker-compose down"
 alias dcu="docker-compose up"
 alias dcud="docker-compose up -d"
 alias dcufr="docker-compose up --build --force-recreate"
+alias dce="docker-compose exec"
 alias dceab="docker-compose exec app bash"
 alias dcecb="docker-compose exec client bash"
 alias dcla="docker-compose logs -f app"
@@ -39,6 +40,7 @@ alias dspa="docker system prune -a -f"
 alias dspav="docker syteme prune -a -f --volumes"
 alias dspv="docker syteme prune -f --volumes"
 alias dstrm="dst && drm"
+alias dcedbdump="dc exec db pg_dump -U user"
 
 # Docker functions
 dst() { docker stop $(docker ps -a -q); }

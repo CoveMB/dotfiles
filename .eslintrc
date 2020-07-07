@@ -26,7 +26,14 @@
     "keyword-spacing": "warn",
     "no-trailing-spaces": "warn",
     "space-before-blocks": "warn",
-    "space-before-function-paren": "warn",
+    "space-before-function-paren": [
+      "warn",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
     "key-spacing": [
       "warn",
       {
@@ -147,8 +154,16 @@
           "minProperties": 2,
           "consistent": true
         },
-        "ImportDeclaration": "never",
-        "ExportDeclaration": "never"
+        "ImportDeclaration": {
+          "multiline": true,
+          "minProperties": 4,
+          "consistent": true
+        },
+        "ExportDeclaration": {
+          "multiline": true,
+          "minProperties": 4,
+          "consistent": true
+        }
       }
     ],
     // Array rules

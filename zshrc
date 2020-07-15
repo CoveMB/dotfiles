@@ -44,3 +44,6 @@ export BUNDLER_EDITOR="'/Applications/Sublime Text.app/Contents/SharedSupport/bi
 HOME=${HOME:-'/home/bjmrq'}
 export PATH="$HOME/"'.platformsh/bin':"$PATH"
 if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
+
+# Was needed to fix docker force recreate
+export LD_LIBRARY_PATH="/usr/local/lib"

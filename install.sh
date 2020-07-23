@@ -52,16 +52,12 @@ fi
 cd "$CURRENT_DIR"
 
 setopt nocasematch
-if [[ ! `uname` =~ "darwin" ]]; then
-  git config --global core.editor "subl -n -w $@ >/dev/null 2>&1"
-  echo 'export BUNDLER_EDITOR="subl $@ >/dev/null 2>&1 -a"' >> zshrc
-else
-  git config --global core.editor "'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' -n -w"
-  bundler_editor="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
-  echo "export BUNDLER_EDITOR=\"${bundler_editor} -a\"" >> zshrc
-fi
+
+git config --global core.editor "code --wait"
 
 zsh ~/.zshrc
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 
 # Install Fira Code font
@@ -131,6 +127,7 @@ mkdir -p ~/Code/BjMrq/Active
 mkdir -p ~/Code/BjMrq/Archive
 mkdir -p ~/Code/BjMrq/Boilerplates
 mkdir -p ~/Code/Notebooks
+mkdir -p ~/Code/Sandboxes
 mkdir -p ~/Code/Softwares\&Drivers
 mkdir -p ~/Code/BjMrq/Dockerfiles
 

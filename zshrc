@@ -35,6 +35,8 @@ export BUNDLER_EDITOR="code $@ >/dev/null 2>&1 -a"
 export BUNDLER_EDITOR="code $@ >/dev/null 2>&1 -a"
 export BUNDLER_EDITOR="code $@ >/dev/null 2>&1 -a"
 
+export RUST_BACKTRACE=1
+
 CASE_SENSITIVE="false"
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 export BUNDLER_EDITOR="code $@ >/dev/null 2>&1 -a"
@@ -53,3 +55,4 @@ export LD_LIBRARY_PATH="/usr/local/lib"
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+# . <(denon --completion)

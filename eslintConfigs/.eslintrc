@@ -12,7 +12,8 @@
         "ignoreStrings": true,
         "ignoreUrls": true,
         "ignoreComments": true,
-        "ignoreTemplateLiterals": true
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
       }
     ],
     "import/prefer-default-export": "off",
@@ -45,7 +46,8 @@
       "warn",
       {
         "exceptions": {
-          "VariableDeclarator": true
+          "VariableDeclarator": true,
+          "Property": true
         },
         "ignoreEOLComments": true
       }
@@ -151,17 +153,17 @@
         },
         "ObjectExpression": {
           "multiline": true,
-          "minProperties": 2,
+          "minProperties": 3,
           "consistent": true
         },
         "ImportDeclaration": {
           "multiline": true,
-          "minProperties": 4,
+          "minProperties": 6,
           "consistent": true
         },
         "ExportDeclaration": {
           "multiline": true,
-          "minProperties": 4,
+          "minProperties": 6,
           "consistent": true
         }
       }
@@ -175,15 +177,20 @@
       "warn",
       {
         "multiline": true,
-        "minItems": 3
+        "minItems": 4
       }
     ],
     "array-element-newline": [
       "warn",
       {
         "multiline": true,
-        "minItems": 3
+        "minItems": 4
       }
+    ],
+    // Function rules
+    "arrow-parens": [
+      "warn",
+      "always"
     ]
   },
   "env": {

@@ -10,6 +10,9 @@ plugins=(git gitfast last-working-dir common-aliases sublime zsh-syntax-highligh
 # Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
 
+# Terraform
+export TF_LOG=TRACE
+
 # Actually load Oh-My-Zsh
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
@@ -56,3 +59,6 @@ export LD_LIBRARY_PATH="/usr/local/lib"
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 # . <(denon --completion)
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform

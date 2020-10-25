@@ -126,6 +126,7 @@ echo 'complete -F __start_kubectl k' >>~/.zshrc
 mkdir -p ~/Code/BjMrq/Active
 mkdir -p ~/Code/BjMrq/Archive
 mkdir -p ~/Code/BjMrq/Boilerplates
+mkdir -p ~/Code/BjMrq/NPM
 mkdir -p ~/Code/Notebooks
 mkdir -p ~/Code/Sandboxes
 mkdir -p ~/Code/Softwares\&Drivers

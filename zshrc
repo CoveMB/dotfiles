@@ -21,13 +21,8 @@ unalias rm # No interactive rm by default (brought by plugins/common-aliases)
 export PATH="${HOME}/.rbenv/bin:${PATH}"
 type -a rbenv > /dev/null && eval "$(rbenv init -)"
 
-# Deno
-export DENO_INSTALL="/home/bjmrq/.deno"
-
-# Rails and Ruby uses the local `bin` folder to store binstubs.
-# So instead of running `bin/rails` like the doc says, just run `rails`
-# Same for `./node_modules/.bin` and nodejs
-export PATH="./bin:./node_modules/.bin:$(yarn global bin):/usr/local/sbin:/home/bjmrq/.local/bin::${DENO_INSTALL}/bin:${PATH}"
+# PATH
+export PATH="./bin:./node_modules/.bin:$(yarn global bin):/usr/local/sbin:/home/bjmrq/.local/bin:${PATH}"
 # Store your own aliases in the ~/.aliases file and load the here.
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
@@ -41,16 +36,6 @@ export BUNDLER_EDITOR="code $@ >/dev/null 2>&1 -a"
 export RUST_BACKTRACE=1
 
 CASE_SENSITIVE="false"
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-export BUNDLER_EDITOR="code $@ >/dev/null 2>&1 -a"
-alias k=kubectl
-complete -F __start_kubectl k
-# export BUNDLER_EDITOR="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' -a"
-
-# BEGIN SNIPPET: Platform.sh CLI configuration
-HOME=${HOME:-'/home/bjmrq'}
-export PATH="$HOME/"'.platformsh/bin':"$PATH"
-if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
 
 # Was needed to fix docker force recreate
 export LD_LIBRARY_PATH="/usr/local/lib"
@@ -62,3 +47,19 @@ export LD_LIBRARY_PATH="/usr/local/lib"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
+
+
+# ARCHIVE
+#KUBCTL
+# [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+# export BUNDLER_EDITOR="code $@ >/dev/null 2>&1 -a"
+# complete -F __start_kubectl k
+
+#Platformsh
+# BEGIN SNIPPET: Platform.sh CLI configuration
+# HOME=${HOME:-'/home/bjmrq'}
+# export PATH="$HOME/"'.platformsh/bin':"$PATH"
+# if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
+
+# Deno
+# export DENO_INSTALL="/home/bjmrq/.deno"

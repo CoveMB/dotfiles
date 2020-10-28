@@ -3,15 +3,13 @@ alias ip="curl ipinfo.io/ip"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
 
-# Quickly serve the current directory as HTTP
-alias serve='ruby -run -e httpd . -p 8000'  # Or python -m SimpleHTTPServer :)
-
 # Utilitaries
 alias l="ls -al"
 alias open="xdg-open"
 alias clip="xclip -selection clip"
 alias npmd="npm install --only=dev"
 alias y="yes"
+alias aptlist="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)"
 
 # Yarn
 alias yarnd="sudo npx handpick --target=devDependencies --manager=yarn"
@@ -78,20 +76,6 @@ dst() { docker stop $(docker ps -a -q); }
 drm() { docker rm $(docker ps -a -q); }
 drmdang() { docker rmi -f $(docker images --quiet --filter 'dangling=true') }
 
-# Gcloud aliases
-alias gc="gcloud config"
-alias ggc="gcloud container clusters get-credentials"
-alias gsp="gcloud config set project"
-
-# Kubernetes aliases
-alias k="kubectl"
-alias ks="kubectl create secret generic"
-alias ka="kubectl apply -f"
-alias kgp="kubectl get pods"
-alias kl="kubectl logs"
-alias ke="kubectl exec -it"
-alias kga="kubectl get all"
-
 # Navigation aliases
 alias goac="cd ~/code/BjMrq/Active"
 alias goar="cd ~/code/BjMrq/Archive"
@@ -109,3 +93,18 @@ alias ngstart="cd ~/code/Softwares\&Drivers/Ngrok && ./ngrok http "
 code64 () {
   echo -n "$1" | base64 | clip
 }
+
+# ARCHIVE
+# Gcloud aliases
+alias gc="gcloud config"
+alias ggc="gcloud container clusters get-credentials"
+alias gsp="gcloud config set project"
+
+# Kubernetes aliases
+alias k="kubectl"
+alias ks="kubectl create secret generic"
+alias ka="kubectl apply -f"
+alias kgp="kubectl get pods"
+alias kl="kubectl logs"
+alias ke="kubectl exec -it"
+alias kga="kubectl get all"

@@ -15,6 +15,7 @@ read email
 
 git config --global user.email $email
 git config --global user.name $full_name
+git config --global init.defaultBranch main
 
 git add .
 git commit --message "My identity for @lewagon in the gitconfig"

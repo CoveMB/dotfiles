@@ -15,9 +15,13 @@ alias aptlist="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/ins
 alias yarnd="sudo npx handpick --target=devDependencies --manager=yarn"
 alias yad="yarn add -D "
 alias ya="yarn add "
+alias yr="yarn remove "
 
 #npm
 alias npmp="npm version patch && npm publish --access public"
+
+#AWS
+
 
 # Terraform
 alias tr="terraform"
@@ -66,7 +70,6 @@ alias dcecb="docker-compose exec client bash"
 alias dcla="docker-compose logs -f app"
 alias dclc="docker-compose logs -f client"
 alias dsp="docker system prune -a -f"
-alias dspa="docker syteme prune -a -f --volumes"
 alias dvp="docker volume prune -f"
 alias dstrm="dst && drm"
 alias dcedbdump="dc exec db pg_dump -U user"

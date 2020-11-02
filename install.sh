@@ -112,15 +112,15 @@ sudo curl -L https://raw.githubusercontent.com/docker/compose/1.26.0/contrib/com
 
 
 # Google Cloud
-echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-sudo apt-get install apt-transport-https ca-certificates gnupg
-sudo apt-get update && sudo apt-get install google-cloud-sdk
-sudo apt-get install google-cloud-sdk-app-engine-java
-gcloud init
-gcloud components install kubectl
-source <(kubectl completion zsh)
-echo 'alias k=kubectl' >>~/.zshrc
-echo 'complete -F __start_kubectl k' >>~/.zshrc
+# echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+# sudo apt-get install apt-transport-https ca-certificates gnupg
+# sudo apt-get update && sudo apt-get install google-cloud-sdk
+# sudo apt-get install google-cloud-sdk-app-engine-java
+# gcloud init
+# gcloud components install kubectl
+# source <(kubectl completion zsh)
+# echo 'alias k=kubectl' >>~/.zshrc
+# echo 'complete -F __start_kubectl k' >>~/.zshrc
 
 # # Folder structure
 mkdir -p ~/Code/BjMrq/Active

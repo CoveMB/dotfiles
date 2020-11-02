@@ -1,13 +1,18 @@
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-# Node
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt-get install -y nodejs
+# git
+sudo add-apt-repository ppa:git-core/ppa 
+sudo apt update 
+sudo apt install git
+
+# Node Version Manager
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
+nvm install node
 
 # Yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update && sudo apt install yarn
+sudo apt update && sudo apt install --no-install-recommends yarn
 
 #Global eslint
 yarn global add eslint
@@ -49,6 +54,9 @@ if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
   echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
   git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
 fi
+
+
+
 cd "$CURRENT_DIR"
 
 setopt nocasematch
@@ -58,6 +66,9 @@ git config --global core.editor "code --wait"
 zsh ~/.zshrc
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+ln -s /home/bjmrq/code/dotfiles/.p10k.zsh ~/
 
 
 # Install Fira Code font
@@ -86,19 +97,6 @@ done
 echo "fc-cache -f"
 fc-cache -f
 
-# Sublime Text
-# if [[ ! `uname` =~ "darwin" ]]; then
-#   SUBL_PATH=~/.config/sublime-text-3
-# else
-#   SUBL_PATH=~/Library/Application\ Support/Sublime\ Text\ 3
-# fi
-# mkdir -p $SUBL_PATH/Packages/User $SUBL_PATH/Installed\ Packages
-# backup "$SUBL_PATH/Packages/User/Preferences.sublime-settings"
-# curl -k https://sublime.wbond.net/Package%20Control.sublime-package > $SUBL_PATH/Installed\ Packages/Package\ Control.sublime-package
-# ln -s $PWD/Preferences.sublime-settings $SUBL_PATH/Packages/User/Preferences.sublime-settings
-# ln -s $PWD/Package\ Control.sublime-settings $SUBL_PATH/Packages/User/Package\ Control.sublime-settings
-# ln -s $PWD/SublimeLinter.sublime-settings $SUBL_PATH/Packages/User/SublimeLinter.sublime-settings
-
 # Docker
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
@@ -108,8 +106,6 @@ chmod +x /usr/local/bin/docker-compose
 sudo usermod -aG docker ${USER}
 su -s ${USER}
 sudo curl -L https://raw.githubusercontent.com/docker/compose/1.26.0/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
-
-
 
 # Google Cloud
 # echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list

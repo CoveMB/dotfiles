@@ -1,9 +1,20 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 ZSH=$HOME/.oh-my-zsh
 
 # You can change the theme with another one:
 #   https://github.com/robbyrussell/oh-my-zsh/wiki/themes
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Show prompt segment "kubecontext" only when the command you are typing
+# invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
+typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
 
 # Useful plugins for Rails development with Sublime Text
 plugins=(git gitfast last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
@@ -19,8 +30,12 @@ source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
 
 # Load rbenv if installed
-export PATH="${HOME}/.rbenv/bin:${PATH}"
-type -a rbenv > /dev/null && eval "$(rbenv init -)"
+# export PATH="${HOME}/.rbenv/bin:${PATH}"
+# type -a rbenv > /dev/null && eval "$(rbenv init -)"
+
+# Node version Manager 
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # PATH
 export PATH="./bin:./node_modules/.bin:$(yarn global bin):/usr/local/sbin:/home/bjmrq/.local/bin:${PATH}"
@@ -49,6 +64,8 @@ export LD_LIBRARY_PATH="/usr/local/lib"
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # ARCHIVE
 #KUBCTL
@@ -64,3 +81,4 @@ complete -o nospace -C /usr/bin/terraform terraform
 
 # Deno
 # export DENO_INSTALL="/home/bjmrq/.deno"
+

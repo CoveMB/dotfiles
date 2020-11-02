@@ -67,12 +67,13 @@ alias dce="docker-compose exec"
 alias dcl="docker-compose logs -f"
 alias dceab="docker-compose exec app bash"
 alias dcecb="docker-compose exec client bash"
+alias dceas="docker-compose exec api sh"
 alias dcla="docker-compose logs -f app"
 alias dclc="docker-compose logs -f client"
 alias dsp="docker system prune -a -f"
 alias dvp="docker volume prune -f"
 alias dstrm="dst && drm"
-alias dcedbdump="dc exec db pg_dump -U user"
+alias dcedbdump="dc exec db pg_dump -U "
 
 # Docker functions
 dst() { docker stop $(docker ps -a -q); }

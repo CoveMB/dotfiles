@@ -22,7 +22,6 @@ alias npmp="npm version patch && npm publish --access public"
 
 #AWS
 
-
 # Terraform
 alias tr="terraform"
 alias tri="terraform init"
@@ -40,6 +39,7 @@ alias trsl="terraform state list"
 alias trsp="terraform state pull"
 alias trsm="terraform state mv"
 alias trss="terraform state show"
+alias trfmt="terraform fmt"
 
 # git Aliases
 alias gcod="git checkout dev"
@@ -48,6 +48,7 @@ alias gaa="git add ."
 alias gbd="git branch -d"
 alias gclean="git reset --hard && git clean -df"
 alias gplo="git pull origin"
+alias gploall="ls | xargs -I{} git -C {} pull origin master"
 alias gpso="git push origin"
 alias gplb="git pull bjmrq"
 alias gpsb="git push bjmrq"
@@ -62,6 +63,7 @@ alias dc="docker-compose"
 alias dcd="docker-compose down"
 alias dcu="docker-compose up"
 alias dcud="docker-compose up -d"
+alias dcubuild="docker-compose up --build "
 alias dcufr="docker-compose up --build --force-recreate"
 alias dce="docker-compose exec"
 alias dcl="docker-compose logs -f"

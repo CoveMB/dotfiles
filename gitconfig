@@ -53,6 +53,7 @@
   
 [credential]
 	helper = cache
+
 [init]
 	defaultBranch = main
 	defaultBransch = main

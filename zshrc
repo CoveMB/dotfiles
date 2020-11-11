@@ -12,18 +12,20 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+# Useful plugins for Rails development with Sublime Text
+plugins=(git ssh-agent gitfast terraform last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
+
+export ENABLE_CORRECTION="false"
+
 # Show prompt segment "kubecontext" only when the command you are typing
 # invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
 typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
-
-# Useful plugins for Rails development with Sublime Text
-plugins=(git gitfast last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
 
 # Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
 
 # Terraform
-export TF_LOG=TRACE
+# export TF_LOG=TRACE
 
 # Actually load Oh-My-Zsh
 source "${ZSH}/oh-my-zsh.sh"

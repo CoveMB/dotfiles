@@ -12,8 +12,7 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Useful plugins for Rails development with Sublime Text
-plugins=(git ssh-agent gitfast terraform last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
+plugins=(git gitfast terraform last-working-dir common-aliases zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
 
 export ENABLE_CORRECTION="false"
 

@@ -57,6 +57,7 @@ alias gpsb="git push bjmrq"
 alias gpsu="git push --set-upstream"
 alias gp="git push"
 alias greset="git reset --hard"
+alias gum="git checkout master && git pull && git checkout "
 alias gclean="git branch --merged | egrep -v '(^\*|master|dev|staging|beta|production|prod)' | xargs git branch -d"
 
 #Docker aliases

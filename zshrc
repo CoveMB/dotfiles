@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Start ssh agent
-eval `ssh-agent -s`
-
 ZSH=$HOME/.oh-my-zsh
 
 # You can change the theme with another one:
@@ -15,7 +12,7 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git gitfast terraform last-working-dir common-aliases zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
+plugins=(git ssh-agent gitfast terraform last-working-dir common-aliases zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
 
 export ENABLE_CORRECTION="false"
 

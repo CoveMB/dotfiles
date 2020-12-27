@@ -12,13 +12,9 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git ssh-agent gitfast terraform last-working-dir common-aliases zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
+plugins=(git gitfast terraform last-working-dir common-aliases zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
 
 export ENABLE_CORRECTION="false"
-
-# Show prompt segment "kubecontext" only when the command you are typing
-# invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
-typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
 
 # Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
@@ -30,13 +26,18 @@ export HOMEBREW_NO_ANALYTICS=1
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
 
-# Load rbenv if installed
-# export PATH="${HOME}/.rbenv/bin:${PATH}"
-# type -a rbenv > /dev/null && eval "$(rbenv init -)"
+# Volata enviroenemtn manager for node and yarn
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
-# Node version Manager 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# Android SDK
+export ANDROID_HOME=$HOME/Android/Sdk
+export JAVA_HOME=$HOME/code/Softwares\&Drivers/android-studio/jre
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # PATH
 export PATH="./bin:./node_modules/.bin:$(yarn global bin):/usr/local/sbin:/home/bjmrq/.local/bin:${PATH}"
@@ -83,3 +84,10 @@ complete -o nospace -C /usr/bin/terraform terraform
 # Deno
 # export DENO_INSTALL="/home/bjmrq/.deno"
 
+# Load rbenv if installed
+# export PATH="${HOME}/.rbenv/bin:${PATH}"
+# type -a rbenv > /dev/null && eval "$(rbenv init -)"
+
+# Node version Manager 
+# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

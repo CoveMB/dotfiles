@@ -20,7 +20,13 @@ alias yr="yarn remove "
 #npm
 alias npmp="npm version patch && npm publish --access public"
 
-#AWS
+#Serverless Framework
+alias slso="sls offline start"
+alias slsda="sls deploy -v"
+alias slsdf="sls deploy function -f "
+alias slsl="sls logs -f "
+alias slsi="sls invoke -f "
+alias slsr="sls remove"
 
 # Terraform
 alias tr="terraform"
@@ -41,6 +47,11 @@ alias trsm="terraform state mv"
 alias trss="terraform state show"
 alias trfmt="terraform fmt"
 
+# AWS
+alias sshstage="ssh -i "~/code/Access/spockeeaws.pem" ubuntu@ec2-52-60-174-228.ca-central-1.compute.amazonaws.com"
+alias sshprod="ssh -i "~/code/Access/spockeeaws.pem" ec2-user@ec2-52-60-67-218.ca-central-1.compute.amazonaws.com"
+
+
 # git Aliases
 alias gcod="git checkout dev"
 alias gcob="git checkout -b"
@@ -49,7 +60,9 @@ alias gbd="git branch -d"
 alias gclean="git reset --hard && git clean -df"
 alias gplo="git pull origin"
 alias gacm="git add . && git commit -m"
-alias gam="git add . && git commit --amend --no-edit"
+alias gam="git add . && git commit --amend"
+alias gamps="gam && gpsof"
+alias gpsof="git push -f origin"
 alias gploall="ls | xargs -I{} git -C {} pull origin master"
 alias gpso="git push origin"
 alias gplb="git pull bjmrq"
@@ -57,7 +70,7 @@ alias gpsb="git push bjmrq"
 alias gpsu="git push --set-upstream"
 alias gp="git push"
 alias greset="git reset --hard"
-alias gum="git checkout master && git pull && git checkout "
+alias gum="git checkout dev && git pull && git checkout "
 alias gclean="git branch --merged | egrep -v '(^\*|master|dev|staging|beta|production|prod)' | xargs git branch -d"
 
 #Docker aliases
@@ -77,7 +90,7 @@ alias dclc="docker-compose logs -f client"
 alias dsp="docker system prune -a -f"
 alias dvp="docker volume prune -f"
 alias dstrm="dst && drm"
-alias dcedbdump="dc exec db pg_dump -U "
+alias dcedbdump="dc exec postgres pg_dump -U "
 
 # Docker functions
 dst() { docker stop $(docker ps -a -q); }
@@ -95,7 +108,13 @@ alias godo="cd ~/code/BjMrq/Dockerfiles"
 alias gosand="cd ~/code/Sandboxes"
 
 # Other
-alias ngstart="cd ~/code/Softwares\&Drivers/Ngrok && ./ngrok http "
+alias ngs="~/code/Softwares\&Drivers/Ngrok/ngrok http "
+alias ngsa="~/code/Softwares\&Drivers/Ngrok/ngrok start --all"
+alias emp3="emulator -avd Pixel_3a_API_30_x86"
+
+# Spockee
+alias dcsc="code ~/code/BjMrq/Active/Spockee/docker-compose.yml"
+alias gospockee="cd ~/code/BjMrq/Active/Spockee"
 
 # Functions
 code64 () {

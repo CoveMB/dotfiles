@@ -5,14 +5,10 @@ sudo add-apt-repository ppa:git-core/ppa
 sudo apt update 
 sudo apt install git
 
-# Node Version Manager
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
-nvm install node
-
-# Yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update && sudo apt install --no-install-recommends yarn
+# Install Volta that will install and manage node and yarn and their versions
+curl https://get.volta.sh | bash
+volta install node
+volta install yarn
 
 #Global eslint
 yarn global add eslint
@@ -107,17 +103,6 @@ sudo usermod -aG docker ${USER}
 su -s ${USER}
 sudo curl -L https://raw.githubusercontent.com/docker/compose/1.26.0/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 
-# Google Cloud
-# echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-# sudo apt-get install apt-transport-https ca-certificates gnupg
-# sudo apt-get update && sudo apt-get install google-cloud-sdk
-# sudo apt-get install google-cloud-sdk-app-engine-java
-# gcloud init
-# gcloud components install kubectl
-# source <(kubectl completion zsh)
-# echo 'alias k=kubectl' >>~/.zshrc
-# echo 'complete -F __start_kubectl k' >>~/.zshrc
-
 # # Folder structure
 mkdir -p ~/Code/BjMrq/Active
 mkdir -p ~/Code/BjMrq/Archive
@@ -129,3 +114,25 @@ mkdir -p ~/Code/Softwares\&Drivers
 mkdir -p ~/Code/BjMrq/Dockerfiles
 
 echo "👌  Carry on with git setup!"
+
+
+# ARCHIVE 
+# Google Cloud
+# echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+# sudo apt-get install apt-transport-https ca-certificates gnupg
+# sudo apt-get update && sudo apt-get install google-cloud-sdk
+# sudo apt-get install google-cloud-sdk-app-engine-java
+# gcloud init
+# gcloud components install kubectl
+# source <(kubectl completion zsh)
+# echo 'alias k=kubectl' >>~/.zshrc
+# echo 'complete -F __start_kubectl k' >>~/.zshrc
+
+# # Node Version Manager
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
+# nvm install node
+
+# Yarn
+# curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+# echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+# sudo apt update && sudo apt install --no-install-recommends yarn

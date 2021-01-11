@@ -26,10 +26,7 @@ export HOMEBREW_NO_ANALYTICS=1
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
 
-# Volata enviroenemtn manager for node and yarn
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
+# Volata environemetn manager for node and yarn
 
 # Android SDK
 export ANDROID_HOME=$HOME/Android/Sdk
@@ -39,8 +36,13 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+# ELIXIR
+# ERL_LIBS=$HOME/lib/erlang/lib
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+# $(yarn global bin)
 # PATH
-export PATH="./bin:./node_modules/.bin:$(yarn global bin):/usr/local/sbin:/home/bjmrq/.local/bin:${PATH}"
+export PATH="./bin:./node_modules/.bin:/usr/local/sbin:/home/bjmrq/.local/bin:${PATH}"
 # Store your own aliases in the ~/.aliases file and load the here.
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
@@ -69,6 +71,10 @@ complete -o nospace -C /usr/bin/terraform terraform
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+export SPOCKEE_ROOT="/home/bjmrq/code/BjMrq/Active/Spockee"
+# export SPOCKEE_ROOT="/home/bjmrq/code/BjMrq/Active/spockee-install"
+export SPOCKEE_TEST="/home/bjmrq/code/BjMrq/Active/spockee-install"
+
 # ARCHIVE
 #KUBCTL
 # [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
@@ -91,3 +97,6 @@ complete -o nospace -C /usr/bin/terraform terraform
 # Node version Manager 
 # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

@@ -10,6 +10,7 @@ alias clip="xclip -selection clip"
 alias npmd="npm install --only=dev"
 alias y="yes"
 alias aptlist="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)"
+alias owndir="sudo chmod o+w -R "
 
 # Yarn
 alias yarnd="sudo npx handpick --target=devDependencies --manager=yarn"
@@ -18,7 +19,8 @@ alias ya="yarn add "
 alias yr="yarn remove "
 
 #npm
-alias npmp="npm version patch && npm publish --access public"
+alias npmp="npm version patch && npm publish"
+alias npmpp="npm version patch && npm publish --access public"
 
 #Serverless Framework
 alias slso="sls offline start"
@@ -115,6 +117,8 @@ alias emp3="emulator -avd Pixel_3a_API_30_x86"
 # Spockee
 alias dcsc="code ~/code/BjMrq/Active/Spockee/docker-compose.yml"
 alias gospockee="cd ~/code/BjMrq/Active/Spockee"
+alias startspockee="cd ~/code/BjMrq/Active/Spockee && spockee start android"
+alias spockeeT="SPOCKEE_ROOT=/home/bjmrq/code/BjMrq/Active/spockee-install spockeeTest"
 
 # Functions
 code64 () {

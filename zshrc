@@ -26,7 +26,11 @@ export HOMEBREW_NO_ANALYTICS=1
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
 
-# Volata environemetn manager for node and yarn
+#Sonar 
+export SONAR_TOKEN=664ceea5654679ad50871cc9e5d158c736c3a7ae
+
+
+# Volata environment manager for node and yarn
 
 # Android SDK
 export ANDROID_HOME=$HOME/Android/Sdk

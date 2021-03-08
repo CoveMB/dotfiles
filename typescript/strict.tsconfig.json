@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "alwaysStrict": true,
+    "allowJs": true,
+    "checkJs": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "removeComments": true,
+    "rootDir": ".",
+    "skipLibCheck": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "stripInternal": true,
+    "pretty": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "typeRoots": [
+      "types/*",
+      "node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "./*"
+      ]
+    }
+  },
+  "compileOnSave": true,
+  "exclude": [
+    "node_modules",
+    "./dist"
+  ]
+}

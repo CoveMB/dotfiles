@@ -8,8 +8,8 @@ module.exports = {
     "airbnb-typescript/base",
     "hardcore/ts-for-js",
     "hardcore",
-    'koa',
-    "hardcore/fp"
+    "hardcore/fp",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
   "plugins": [
     "@typescript-eslint",
@@ -41,14 +41,13 @@ module.exports = {
         "ts": "never",
       }
     ],
-    "import/order": "off",
-    "import/no-cycle": "off",
-    "import/unambiguous": 'off',
+    // "import/order": "off",
+    // "import/no-cycle": "off",
+    "import/unambiguous": "off",
     "import/no-namespace": "off",
     "import/group-exports": "off",
     "import/exports-last": "off",
     "import/prefer-default-export": "off",
-    "import/no-unused-modules": "off",
     // Eslint General
     "max-len": [
       "warn",
@@ -63,15 +62,16 @@ module.exports = {
     ],
     "no-underscore-dangle": "off",
     "no-console": "off",
-    "no-magic-numbers": 'off',
+    "no-magic-numbers": "off",
     "no-unused-vars": "off",
     "consistent-return": "off",
     "require-atomic-updates": "off",
     "space-before-function-paren": "off",
     // Typescript
+    "@typescript-eslint/indent": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/naming-convention": "off",
-    "@typescript-eslint/no-magic-numbers": 'off',
+    "@typescript-eslint/no-magic-numbers": "off",
     "@typescript-eslint/no-floating-promises": [
       "error",
       {

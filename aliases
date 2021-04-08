@@ -57,15 +57,17 @@ alias sshprod="ssh -i "~/code/Access/spockeeaws.pem" ec2-user@ec2-52-60-67-218.c
 
 # git Aliases
 alias gco="git checkout "
-alias gcob="git checkout -b"
-alias gaa="git add ."
-alias gbd="git branch -d"
-alias gclean="git reset --hard && git clean -df"
-alias gplo="git pull origin"
+alias gsw="git switch "
+alias gswc="git switch -c "
+alias gcob="git checkout -b "
+alias gaa="git add . "
+alias gbd="git branch -d "
+alias gclean="git reset --hard && git clean -df "
+alias gplo="git pull origin "
 alias gploh="git pull origin HEAD"
 alias gacm="git add . && git commit -m"
-alias gcam="git add . && git commit --amend"
-alias gaam="git add . && git commit --amend"
+alias gcam="git commit --amend "
+alias gacam="git add . && git commit --amend "
 alias gamps="gam && gpsof"
 alias gpsof="git push -f origin"
 alias gploall="ls | xargs -I{} git -C {} pull origin master"
@@ -81,6 +83,7 @@ alias gclean="git branch --merged | egrep -v '(^\*|master|dev|develop|staging|pr
 alias gplor="git pull --rebase origin"
 alias grv="git revert "
 alias glg="git log"
+alias gdfh="git diff HEAD"
 alias glgp="git log --pretty=oneline"
 
 #Docker aliases

@@ -11,7 +11,7 @@ volta install node
 volta install yarn
 
 #Global eslint
-yarn global add eslint
+# yarn global add eslint
 
 backup() {
   target=$1

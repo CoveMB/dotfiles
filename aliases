@@ -55,10 +55,6 @@ alias trsm="terraform state mv"
 alias trss="terraform state show"
 alias trfmt="terraform fmt"
 
-# AWS
-alias sshstage="ssh -i "~/code/Access/spockeeaws.pem" ubuntu@ec2-52-60-174-228.ca-central-1.compute.amazonaws.com"
-alias sshprod="ssh -i "~/code/Access/spockeeaws.pem" ec2-user@ec2-52-60-67-218.ca-central-1.compute.amazonaws.com"
-
 
 # git Aliases
 alias gco="git checkout "
@@ -71,8 +67,10 @@ alias gclean="git reset --hard && git clean -df "
 alias gplo="git pull origin "
 alias gploh="git pull origin HEAD"
 alias gacm="git add . && git commit -m"
-alias gcam="git commit --amend -m "
-alias gacam="git add . && git commit --amend -m "
+alias gcam="git commit --amend "
+alias gcamm="git commit --amend -m"
+alias gacam="git add . && git commit --amend "
+alias gacamm="git add . && git commit --amend -m"
 alias gamps="gam && gpsof"
 alias gpsof="git push -f origin"
 alias gploall="ls | xargs -I{} git -C {} pull origin master"
@@ -133,23 +131,6 @@ alias sonar="~/code/Softwares\&Drivers/SonarCloud/bin/sonar-scanner"
 alias ngsa="~/code/Softwares\&Drivers/Ngrok/ngrok start --all"
 alias emp3="emulator -avd Pixel_3a_API_30_x86"
 alias connectPixel="adb -s HT7B71A01391 reverse tcp:8081 tcp:8081"
-
-# Spockee
-alias dcsc="code ~/code/BjMrq/Active/Spockee/docker-compose.yml"
-alias gospockee="cd ~/code/BjMrq/Active/Spockee"
-alias gocli="cd ~/code/BjMrq/Active/Spockee/CLI"
-alias startspockee="cd ~/code/BjMrq/Active/Spockee && spockee start android"
-alias spockeeT="SPOCKEE_ROOT=/home/bjmrq/code/BjMrq/Active/spockee-install spockeeTest"
-alias spockeeCLITest="SPOCKEE_ROOT=/home/bjmrq/code/BjMrq/Active/spockee-install spockee"
-alias getspockee="npm i -g @spockee/cli"
-alias dcm="docker-compose -f docker-compose.yml -f docker-compose.main.yml"
-alias dcs="docker-compose -f docker-compose.yml -f docker-compose.sync.yml"
-alias dcdm="docker-compose -f docker-compose.yml -f docker-compose.main.yml down"
-alias dcds="docker-compose -f docker-compose.yml -f docker-compose.sync.yml down"
-alias dcum="docker-compose -f docker-compose.yml -f docker-compose.main.yml up"
-alias dcus="docker-compose -f docker-compose.yml -f docker-compose.sync.yml up"
-alias dcem="docker-compose -f docker-compose.yml -f docker-compose.main.yml exec"
-alias dceas="docker-compose -f docker-compose.yml -f docker-compose.main.yml exec api sh"
 
 # Functions
 code64 () {

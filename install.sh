@@ -96,22 +96,26 @@ fc-cache -f
 # Docker
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
+
 # Docker-compose
-curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 sudo usermod -aG docker ${USER}
 su -s ${USER}
 sudo curl -L https://raw.githubusercontent.com/docker/compose/1.26.0/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 
+# AWS
+# todo
+
 # # Folder structure
-mkdir -p ~/Code/BjMrq/Active
-mkdir -p ~/Code/BjMrq/Archive
-mkdir -p ~/Code/BjMrq/Boilerplates
-mkdir -p ~/Code/BjMrq/NPM
-mkdir -p ~/Code/Notebooks
-mkdir -p ~/Code/Sandboxes
-mkdir -p ~/Code/Softwares\&Drivers
-mkdir -p ~/Code/BjMrq/Dockerfiles
+# mkdir -p ~/Code/BjMrq/Active
+# mkdir -p ~/Code/BjMrq/Archive
+# mkdir -p ~/Code/BjMrq/Boilerplates
+# mkdir -p ~/Code/BjMrq/NPM
+# mkdir -p ~/Code/Notebooks
+# mkdir -p ~/Code/Sandboxes
+# mkdir -p ~/Code/Softwares\&Drivers
+# mkdir -p ~/Code/BjMrq/Dockerfiles
 
 echo "👌  Carry on with git setup!"
 

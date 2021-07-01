@@ -1,6 +1,6 @@
+sudo add-apt-repository ppa:git-core/ppa 
 sudo apt install -y git zsh curl jq 
 apt-transport-https
-sudo snap install hub --classic
 
 mkdir -p ~/.ssh && ssh-keygen -t ed25519 -o -a 100 -f ~/.ssh/id_ed25519 -C "bmarquiscom@gmail.com"
 

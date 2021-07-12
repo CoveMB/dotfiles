@@ -26,27 +26,16 @@ export HOMEBREW_NO_ANALYTICS=1
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm # No interactive rm by default (brought by plugins/common-aliases)
 
-#Sonar 
-export SONAR_TOKEN=664ceea5654679ad50871cc9e5d158c736c3a7ae
-
-
-# Volata environment manager for node and yarn
-
-# Android SDK
-export ANDROID_HOME=$HOME/Android/Sdk
-export JAVA_HOME=$HOME/code/Softwares\&Drivers/android-studio/jre
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
 # ELIXIR
 # ERL_LIBS=$HOME/lib/erlang/lib
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # $(yarn global bin)
 # PATH
-export PATH="./bin:./node_modules/.bin:/usr/local/sbin:/home/bjmrq/.local/bin:${PATH}"
+
+/bin:/usr/bin:/usr/local/bin
+
+export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/bjmrq/.local/bin:/usr/share/${PATH}"
 # Store your own aliases in the ~/.aliases file and load the here.
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
@@ -74,10 +63,6 @@ complete -o nospace -C /usr/bin/terraform terraform
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export SPOCKEE_ROOT="/home/bjmrq/code/BjMrq/Active/Spockee"
-# export SPOCKEE_ROOT="/home/bjmrq/code/BjMrq/Active/spockee-install"
-export SPOCKEE_TEST="/home/bjmrq/code/BjMrq/Active/spockee-install"
 
 # ARCHIVE
 #KUBCTL

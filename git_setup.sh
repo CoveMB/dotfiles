@@ -1,5 +1,5 @@
 sudo add-apt-repository ppa:git-core/ppa 
-sudo apt install -y git zsh curl jq 
+sudo apt install -y git
 apt-transport-https
 
 mkdir -p ~/.ssh && ssh-keygen -t ed25519 -o -a 100 -f ~/.ssh/id_ed25519 -C "bmarquiscom@gmail.com"
@@ -16,6 +16,7 @@ read email
 git config --global user.email $email
 git config --global user.name $full_name
 git config --global init.defaultBranch main
+git config --global core.editor "code --wait"
 
 git add .
 git commit --message "My identity for @lewagon in the gitconfig"

@@ -5,7 +5,6 @@ alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/download
 
 # Utilitaries
 alias l="ls -al"
-alias open="xdg-open"
 alias clip="xclip -selection clip"
 alias npmd="npm install --only=dev"
 alias y="yes"
@@ -18,6 +17,9 @@ alias yad="yarn add -D "
 alias ya="yarn add "
 alias yr="yarn remove "
 alias ypure="yarn --pure-lockfile"
+alias test="yarn test"
+alias yreset="rm -rf node_modules && yarn install"
+alias yresethard="rm -rf node_modules && yarn cache clean --all && yarn install"
 
 #npm
 alias npmp="npm version patch && npm publish"
@@ -27,6 +29,7 @@ alias npmid="npm install --save-dev"
 alias npmu="npm update"
 alias clearmodules="rm -rf node_modules yarn.lock package-lock.json"
 alias npmreset="rm -rf node_modules yarn.lock package-lock.json && npm install"
+alias catpackage="cat package.json"
 
 #Serverless Framework
 alias slso="sls offline start"
@@ -55,32 +58,43 @@ alias trsm="terraform state mv"
 alias trss="terraform state show"
 alias trfmt="terraform fmt"
 
+# AWS
+alias sshstage="ssh -i "~/code/Access/spockeeaws.pem" ubuntu@ec2-52-60-174-228.ca-central-1.compute.amazonaws.com"
+alias sshprod="ssh -i "~/code/Access/spockeeaws.pem" ec2-user@ec2-52-60-67-218.ca-central-1.compute.amazonaws.com"
+
 
 # git Aliases
 alias gco="git checkout "
 alias gsw="git switch "
 alias gswc="git switch -c "
 alias gcob="git checkout -b "
-alias gaa="git add . "
+alias gaa="git add --all "
+alias ga="git add "
 alias gbd="git branch -d "
 alias gclean="git reset --hard && git clean -df "
 alias gplo="git pull origin "
 alias gploh="git pull origin HEAD"
-alias gacm="git add . && git commit -m"
-alias gcam="git commit --amend "
-alias gcamm="git commit --amend -m"
-alias gacam="git add . && git commit --amend "
-alias gacamm="git add . && git commit --amend -m"
+alias testnpush="yarn test && git push origin HEAD"
+alias gri="git rebase -i"
+alias gpsoh="tsc --noEmit && yarn test && git push origin HEAD"
+alias ga="git add "
+alias gpsohnt="git push origin HEAD"
+alias grba="git rebase --abort"
+alias grbc="git rebase --continue"
+alias gcm="git commit -m"
+alias gacm="git add --all && git commit -m"
+alias gcam="git commit --amend -m "
+alias gacam="git add . && git commit --amend -m "
 alias gamps="gam && gpsof"
 alias gpsof="git push -f origin"
 alias gploall="ls | xargs -I{} git -C {} pull origin master"
 alias gpso="git push origin"
-alias gpsoh="git push origin HEAD"
 alias gplb="git pull bjmrq"
 alias gpsb="git push bjmrq"
 alias gpsu="git push --set-upstream"
 alias gp="git push"
 alias greseth="git reset --hard"
+alias gresethmaster="git reset --hard FETCH_HEAD"
 alias greset="git reset"
 alias gum="git checkout dev && git pull && git checkout "
 alias gclean="git branch --merged | egrep -v '(^\*|master|dev|develop|staging|production)' | xargs git branch -d"
@@ -91,20 +105,23 @@ alias glogp="git log --pretty=oneline"
 alias gdiffh="git diff HEAD"
 alias grestore="git restore"
 alias gitremove="rm -rf .git"
+alias gdevelopm="git checkout develop && git pull origin develop"
+
+alias gacmf="yarn format && git add --all && git commit -m"
 
 #Docker aliases
-alias dc="docker-compose"
-alias dcd="docker-compose down"
-alias dcu="docker-compose up"
-alias dcud="docker-compose up -d"
-alias dcubuild="docker-compose up --build "
-alias dcufr="docker-compose up --build --force-recreate"
-alias dce="docker-compose exec"
-alias dcl="docker-compose logs -f"
-alias dceab="docker-compose exec app bash"
-alias dcecb="docker-compose exec client bash"
-alias dcla="docker-compose logs -f app"
-alias dclc="docker-compose logs -f client"
+alias dc="docker compose"
+alias dcd="docker compose down"
+alias dcu="docker compose up"
+alias dcud="docker compose up -d"
+alias dcubuild="docker compose up --build "
+alias dcufr="docker compose up --build --force-recreate"
+alias dce="docker compose exec"
+alias dcl="docker compose logs -f"
+alias dceab="docker compose exec app bash"
+alias dcecb="docker compose exec client bash"
+alias dcla="docker compose logs -f app"
+alias dclc="docker compose logs -f client"
 alias dsp="docker system prune -a -f"
 alias dvp="docker volume prune -f"
 alias dstrm="dst && drm"
@@ -115,7 +132,22 @@ dst() { docker stop $(docker ps -a -q); }
 drm() { docker rm $(docker ps -a -q); }
 drmdang() { docker rmi -f $(docker images --quiet --filter 'dangling=true') }
 
+# Serverless
+alias deploy="yarn deploy --stage bmarquis --verbose"
+alias deploy-kpi="yarn deploy-kpi -s bmarquis"
+alias undeploy="yarn undeploy --stage bmarquis --verbose"
+alias undeploy-kpi="yarn undeploy-kpi --stage bmarquis --verbose"
+alias deployf="sls deploy function --stage bmarquis -f"
+# alias logt="serverless logs -s bmarquis -f"
+# alias invoke="serverless invoke -s bmarquis -f"
+alias invoke="serverless invoke -s bmarquis --path invoke_test.json -f"
+tailwatch () {
+  aws logs tail "$1" --follow --format short
+}
+
+
 # Navigation aliases
+alias gocode="cd ~/code"
 alias goac="cd ~/code/BjMrq/Active"
 alias goar="cd ~/code/BjMrq/Archive"
 alias gobo="cd ~/code/BjMrq/Boilerplates"
@@ -124,13 +156,22 @@ alias gonb="cd ~/code/Notebooks"
 alias gosd="cd ~/code/Softwares\&Drivers"
 alias godo="cd ~/code/BjMrq/Dockerfiles"
 alias gosand="cd ~/code/Sandboxes"
+alias goblockchain="cd ~/code/BjMrq/Blockchain"
+alias gooz="cd ~/code/BjMrq/OpenZeppelin"
+alias godefender="cd ~/code/BjMrq/OpenZeppelin/defender"
+alias gohardsand="goblockchain && cd hardhat-sandbox"
+ 
 
 # Other
+alias c="clear"
 alias ngs="~/code/Softwares\&Drivers/Ngrok/ngrok http "
 alias sonar="~/code/Softwares\&Drivers/SonarCloud/bin/sonar-scanner"
 alias ngsa="~/code/Softwares\&Drivers/Ngrok/ngrok start --all"
 alias emp3="emulator -avd Pixel_3a_API_30_x86"
 alias connectPixel="adb -s HT7B71A01391 reverse tcp:8081 tcp:8081"
+alias tmp="touch tmp.json && code tmp.json"
+alias vscodep="vsce package && vsce publish patch"
+
 
 # Functions
 code64 () {
@@ -151,3 +192,18 @@ alias kgp="kubectl get pods"
 alias kl="kubectl logs"
 alias ke="kubectl exec -it"
 alias kga="kubectl get all"
+
+# Aldo
+# General
+alias aldoDev='ALDO_ROOT="$ALDO_ROOT_DEV" node /Users/bmarquis/AldoCli/dist/commands/index.js'
+alias aldo='ALDO_ROOT="$ALDO_ROOT" node /Users/bmarquis/AldoCli/dist/commands/index.js'
+ 
+alias debugdeploy="SLS_DEBUG=* deploy"
+alias taillog="serverless logs -s bmarquis -t -f"
+
+# OpenZeppelin
+alias deployfn="yarn deploy:function "
+alias load="yarn deploy:load"
+alias switchprod="godefender && bash ./hack/switch_aws_envs/defender-sts.sh defender_prd_sts "
+alias switchdev="godefender && bash ./hack/switch_aws_envs/defender-sts.sh defender_dev_sts "
+alias hrs="gooz && cd ./hedera-json-rpc-relay && dcu"

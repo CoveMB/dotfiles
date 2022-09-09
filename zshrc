@@ -8,7 +8,7 @@ fi
 ZSH=$HOME/.oh-my-zsh
 
 # You can change the theme with another one:
-#   https://github.com/robbyrussell/oh-my-zsh/wiki/themes
+# https://github.com/robbyrussell/oh-my-zsh/wiki/themes
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -32,10 +32,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 # $(yarn global bin)
 # PATH
-
-/bin:/usr/bin:/usr/local/bin
-
-export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/bjmrq/.local/bin:/usr/share/${PATH}"
+export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/bjmrq/.local/bin:${PATH}"
 # Store your own aliases in the ~/.aliases file and load the here.
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
@@ -84,8 +81,9 @@ complete -o nospace -C /usr/bin/terraform terraform
 # type -a rbenv > /dev/null && eval "$(rbenv init -)"
 
 # Node version Manager 
-# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+# export VOLTA_HOME="$HOME/.volta"
+# export PATH="$VOLTA_HOME/bin:$PATH"

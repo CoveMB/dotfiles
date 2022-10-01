@@ -10,6 +10,8 @@ alias npmd="npm install --only=dev"
 alias y="yes"
 alias aptlist="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)"
 alias owndir="sudo chmod o+w -R "
+alias snapupdate="pkill snap-store & sudo snap refresh snap-store & sudo snap refresh "
+alias open="xdg-open" # Desactivate on MacOs
 
 # Yarn
 alias yarnd="sudo npx handpick --target=devDependencies --manager=yarn"
@@ -204,6 +206,6 @@ alias taillog="serverless logs -s bmarquis -t -f"
 # OpenZeppelin
 alias deployfn="yarn deploy:function "
 alias load="yarn deploy:load"
-alias switchprod="godefender && bash ./hack/switch_aws_envs/defender-sts.sh defender_prd_sts "
-alias switchdev="godefender && bash ./hack/switch_aws_envs/defender-sts.sh defender_dev_sts "
+alias switchprod=". ~/code/BjMrq/OpenZeppelin/defender/hack/switch_aws_envs/defender-sts.sh && defender_prd_sts "
+alias switchdev=". ~/code/BjMrq/OpenZeppelin/defender/hack/switch_aws_envs/defender-sts.sh && defender_dev_sts "
 alias hrs="gooz && cd ./hedera-json-rpc-relay && dcu"

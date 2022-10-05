@@ -1,14 +1,14 @@
 # Some deps
-# sudo apt install -y curl jq xclip gnome-tweaks
+sudo apt install -y curl jq xclip gnome-tweaks
 
-# # Install Volta that will install and manage node and yarn and their versions
-# curl https://get.volta.sh | bash
-# volta install node
-# volta install yarn
+# Install Volta that will install and manage node and yarn and their versions
+curl https://get.volta.sh | bash
+volta install node
+volta install yarn
 
-# sudo apt-get install build-essential
-# sudo npm install -g node-gyp
-# sudo apt install shotwell
+sudo apt-get install build-essential
+sudo npm install -g node-gyp
+sudo apt install shotwell
 
 
 
@@ -40,6 +40,8 @@ for name in *; do
   fi
 done
 
+ln -s "$PWD/.p10k.zsh" "~/"
+
 # REGULAR="\\033[0;39m"
 # YELLOW="\\033[1;33m"
 # GREEN="\\033[1;32m"
@@ -47,53 +49,59 @@ done
 # setopt nocasematch
 
 
-# # ZSH
-# sudo apt install -y zsh
-# zsh ~/.zshrc
-
-# CURRENT_DIR=`pwd`
-# ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
-# mkdir -p "$ZSH_PLUGINS_DIR" && cd "$ZSH_PLUGINS_DIR"
-# if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
-#   echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
-#   git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
-# fi
-# if [ ! -d "$ZSH_PLUGINS_DIR/zsh-autosuggestions" ]; then
-#   echo "-----> Installing zsh plugin 'zsh-autosuggestions'..."
-#   git clone git://github.com/zsh-users/zsh-autosuggestions.git
-# fi
-
+# ZSH
+sudo apt install -y zsh
 chsh -s $(which zsh)
+zsh ~/.zshrc
+
+CURRENT_DIR=`pwd`
+ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
+ZSH_THEMES_DIR="$HOME/.oh-my-zsh/custom/themes"
+mkdir -p "$ZSH_PLUGINS_DIR" && mkdir -p "$ZSH_THEMES_DIR" 
+if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
+  cd "$ZSH_PLUGINS_DIR"
+  echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
+  git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+  cd "$HOME"
+fi
+if [ ! -d "$ZSH_PLUGINS_DIR/zsh-autosuggestions" ]; then
+  cd "$ZSH_PLUGINS_DIR"
+  echo "-----> Installing zsh plugin 'zsh-autosuggestions'..."
+  git clone git://github.com/zsh-users/zsh-autosuggestions.git
+  cd "$HOME"
+fi
+if [ ! -d "$ZSH_THEMES_DIR/powerlevel10k" ]; then
+  echo "-----> Installing zsh plugin 'powerlevel10k'..."
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git
+  cd "$HOME"
+fi
 
 
-# git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-# ln -s /home/bjmrq/code/dotfiles/.p10k.zsh ~/
 
+# Install Fira Code font
+fonts_dir="${HOME}/.local/share/fonts"
+if [ ! -d "${fonts_dir}" ]; then
+    echo "mkdir -p $fonts_dir"
+    mkdir -p "${fonts_dir}"
+else
+    echo "Found fonts dir $fonts_dir"
+fi
 
-# # Install Fira Code font
-# fonts_dir="${HOME}/.local/share/fonts"
-# if [ ! -d "${fonts_dir}" ]; then
-#     echo "mkdir -p $fonts_dir"
-#     mkdir -p "${fonts_dir}"
-# else
-#     echo "Found fonts dir $fonts_dir"
-# fi
-
-# for type in Bold Light Medium Regular Retina; do
-#     file_path="${HOME}/.local/share/fonts/FiraCode-${type}.ttf"
-#     file_url="https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-${type}.ttf?raw=true"
-#     if [ ! -e "${file_path}" ]; then
-#         echo "wget -O $file_path $file_url"
-#         wget -O "${file_path}" "${file_url}"
-#     else
-#   echo "Found existing file $file_path"
-#     fi;
-# done
+for type in Bold Light Medium Regular Retina; do
+    file_path="${HOME}/.local/share/fonts/FiraCode-${type}.ttf"
+    file_url="https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-${type}.ttf?raw=true"
+    if [ ! -e "${file_path}" ]; then
+        echo "wget -O $file_path $file_url"
+        curl -O "${file_path}" "${file_url}"
+    else
+  echo "Found existing file $file_path"
+    fi;
+done
 
 # echo "fc-cache -f"
 # fc-cache -f
 
-# # Docker
+# Docker
 # curl -fsSL https://get.docker.com -o get-docker.sh | sh get-docker.sh
 
 # # Docker-compose
@@ -103,17 +111,17 @@ chsh -s $(which zsh)
 # su -s ${USER}
 # curl -L https://raw.githubusercontent.com/docker/compose/1.26.0/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 
-# # Folder structure
-# mkdir -p ~/code/BjMrq/Active
-# mkdir -p ~/code/BjMrq/Archive
-# mkdir -p ~/code/BjMrq/Boilerplates
-# mkdir -p ~/code/BjMrq/NPM
-# mkdir -p ~/code/Notebooks
-# mkdir -p ~/code/Sandboxes
-# mkdir -p ~/code/Softwares\&Drivers
-# mkdir -p ~/code/BjMrq/Dockerfiles
+# Folder structure
+mkdir -p ~/Code/BjMrq/Active
+mkdir -p ~/Code/BjMrq/Archive
+mkdir -p ~/Code/BjMrq/Boilerplates
+mkdir -p ~/Code/BjMrq/NPM
+mkdir -p ~/Code/Notebooks
+mkdir -p ~/Code/Sandboxes
+mkdir -p ~/Code/Softwares\&Drivers
+mkdir -p ~/Code/BjMrq/Dockerfiles
 
-# echo "👌  Carry on with git setup!"
+echo "👌  Carry on with git setup!"
 
 
 # # ARCHIVE 

@@ -12,12 +12,13 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git gitfast terraform last-working-dir common-aliases zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
+plugins=(git gitfast last-working-dir common-aliases zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
 
 export ENABLE_CORRECTION="false"
 
 # Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
+
 
 # Terraform
 # export TF_LOG=TRACE
@@ -30,9 +31,16 @@ unalias rm # No interactive rm by default (brought by plugins/common-aliases)
 # ERL_LIBS=$HOME/lib/erlang/lib
 export ERL_AFLAGS="-kernel shell_history enabled"
 
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
 # $(yarn global bin)
 # PATH
-export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/bjmrq/.local/bin:${PATH}"
+export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/bjmrq/.local/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${VOLTA_HOME}/bin:${PATH}"
+
+# Defender M1 support
+export CPLUS_INCLUDE_PATH=/opt/homebrew/include
+
 # Store your own aliases in the ~/.aliases file and load the here.
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
@@ -81,9 +89,7 @@ complete -o nospace -C /usr/bin/terraform terraform
 # type -a rbenv > /dev/null && eval "$(rbenv init -)"
 
 # Node version Manager 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# export VOLTA_HOME="$HOME/.volta"
-# export PATH="$VOLTA_HOME/bin:$PATH"

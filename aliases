@@ -11,7 +11,7 @@ alias y="yes"
 alias aptlist="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)"
 alias owndir="sudo chmod o+w -R "
 alias snapupdate="pkill snap-store & sudo snap refresh snap-store & sudo snap refresh "
-alias open="xdg-open" # Desactivate on MacOs
+# alias open="xdg-open" # Desactivate on MacOs
 
 # Yarn
 alias yarnd="sudo npx handpick --target=devDependencies --manager=yarn"
@@ -61,8 +61,8 @@ alias trss="terraform state show"
 alias trfmt="terraform fmt"
 
 # AWS
-alias sshstage="ssh -i "~/code/Access/spockeeaws.pem" ubuntu@ec2-52-60-174-228.ca-central-1.compute.amazonaws.com"
-alias sshprod="ssh -i "~/code/Access/spockeeaws.pem" ec2-user@ec2-52-60-67-218.ca-central-1.compute.amazonaws.com"
+alias sshstage="ssh -i "~/Code/Access/spockeeaws.pem" ubuntu@ec2-52-60-174-228.ca-central-1.compute.amazonaws.com"
+alias sshprod="ssh -i "~/Code/Access/spockeeaws.pem" ec2-user@ec2-52-60-67-218.ca-central-1.compute.amazonaws.com"
 
 
 # git Aliases
@@ -149,29 +149,28 @@ tailwatch () {
 
 
 # Navigation aliases
-alias gocode="cd ~/code"
-alias goac="cd ~/code/BjMrq/Active"
-alias goar="cd ~/code/BjMrq/Archive"
-alias gobo="cd ~/code/BjMrq/Boilerplates"
-alias gonpm="cd ~/code/BjMrq/NPM"
-alias gonb="cd ~/code/Notebooks"
-alias gosd="cd ~/code/Softwares\&Drivers"
-alias godo="cd ~/code/BjMrq/Dockerfiles"
-alias gosand="cd ~/code/Sandboxes"
-alias goblockchain="cd ~/code/BjMrq/Blockchain"
-alias gooz="cd ~/code/BjMrq/OpenZeppelin"
-alias godefender="cd ~/code/BjMrq/OpenZeppelin/defender"
+alias gocode="cd ~/Code"
+alias goac="cd ~/Code/BjMrq/Active"
+alias goar="cd ~/Code/BjMrq/Archive"
+alias gobo="cd ~/Code/BjMrq/Boilerplates"
+alias gonpm="cd ~/Code/BjMrq/NPM"
+alias gonb="cd ~/Code/Notebooks"
+alias gosd="cd ~/Code/Softwares\&Drivers"
+alias godo="cd ~/Code/BjMrq/Dockerfiles"
+alias gosand="cd ~/Code/Sandboxes"
+alias goblockchain="cd ~/Code/BjMrq/Blockchain"
+alias gooz="cd ~/Code/BjMrq/OpenZeppelin"
+alias godefender="cd ~/Code/BjMrq/OpenZeppelin/defender"
 alias gohardsand="goblockchain && cd hardhat-sandbox"
  
 
 # Other
 alias c="clear"
-alias ngs="~/code/Softwares\&Drivers/Ngrok/ngrok http "
-alias sonar="~/code/Softwares\&Drivers/SonarCloud/bin/sonar-scanner"
-alias ngsa="~/code/Softwares\&Drivers/Ngrok/ngrok start --all"
-alias emp3="emulator -avd Pixel_3a_API_30_x86"
-alias connectPixel="adb -s HT7B71A01391 reverse tcp:8081 tcp:8081"
-alias tmp="touch tmp.json && code tmp.json"
+alias ngrok="~/Code/Softwares\&Drivers/Ngrok/ngrok"
+alias ngs="~/Code/Softwares\&Drivers/Ngrok/ngrok http "
+alias ngsa="~/Code/Softwares\&Drivers/Ngrok/ngrok start --all"
+alias sonar="~/Code/Softwares\&Drivers/SonarCloud/bin/sonar-scanner"
+alias tmp="touch tmp.json && Code tmp.json"
 alias vscodep="vsce package && vsce publish patch"
 
 
@@ -195,17 +194,9 @@ alias kl="kubectl logs"
 alias ke="kubectl exec -it"
 alias kga="kubectl get all"
 
-# Aldo
-# General
-alias aldoDev='ALDO_ROOT="$ALDO_ROOT_DEV" node /Users/bmarquis/AldoCli/dist/commands/index.js'
-alias aldo='ALDO_ROOT="$ALDO_ROOT" node /Users/bmarquis/AldoCli/dist/commands/index.js'
- 
-alias debugdeploy="SLS_DEBUG=* deploy"
-alias taillog="serverless logs -s bmarquis -t -f"
-
 # OpenZeppelin
 alias deployfn="yarn deploy:function "
 alias load="yarn deploy:load"
-alias switchprod=". ~/code/BjMrq/OpenZeppelin/defender/hack/switch_aws_envs/defender-sts.sh && defender_prd_sts "
-alias switchdev=". ~/code/BjMrq/OpenZeppelin/defender/hack/switch_aws_envs/defender-sts.sh && defender_dev_sts "
+alias switchprod=". ~/Code/BjMrq/OpenZeppelin/defender/hack/switch_aws_envs/defender-sts.sh && defender_prd_sts "
+alias switchdev=". ~/Code/BjMrq/OpenZeppelin/defender/hack/switch_aws_envs/defender-sts.sh && defender_dev_sts "
 alias hrs="gooz && cd ./hedera-json-rpc-relay && dcu"

@@ -112,14 +112,14 @@ done
 # curl -L https://raw.githubusercontent.com/docker/compose/1.26.0/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 
 # Folder structure
-mkdir -p ~/Code/BjMrq/Active
-mkdir -p ~/Code/BjMrq/Archive
-mkdir -p ~/Code/BjMrq/Boilerplates
-mkdir -p ~/Code/BjMrq/NPM
+mkdir -p ~/Code/CoveMB/Active
+mkdir -p ~/Code/CoveMB/Archive
+mkdir -p ~/Code/CoveMB/Boilerplates
+mkdir -p ~/Code/CoveMB/NPM
 mkdir -p ~/Code/Notebooks
 mkdir -p ~/Code/Sandboxes
 mkdir -p ~/Code/Softwares\&Drivers
-mkdir -p ~/Code/BjMrq/Dockerfiles
+mkdir -p ~/Code/CoveMB/Dockerfiles
 
 echo "👌  Carry on with git setup!"
 

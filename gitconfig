@@ -33,8 +33,6 @@
   # Then other can access via `git clone git://#{YOUR_IP_ADDRESS}/
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
 
-  m = checkout master
-
   # Removes a file from the index
   unstage = reset HEAD --
 
@@ -49,10 +47,9 @@
 
 [user]
 	email = bmarquiscom@gmail.com
-	name = Benjamin
-	name = Benjamin
-	name = Benjamin
-	name = bjmrq
+	name = Cove
+	name = CoveMB
+	signingkey = /Users/CoveMB/.ssh/id_ed25519
   
 [credential]
 	helper = cache
@@ -64,3 +61,7 @@
 	rebase = false
 	# ff = only
   
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true

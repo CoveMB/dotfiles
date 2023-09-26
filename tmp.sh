@@ -1,26 +1,3 @@
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-### Install
-# Apps
-brew install --cask brave-browser spotify
-
-# Utils
-brew install --cask dockmate keybase rectangle bartender
-
-xcode-select --install
-
-# Coding
-brew install --cask iterm2 zsh visual-studio-code git volta
-brew install docker --cask
-
-# Office
-brew install slack
-
-### Set up
-# Node
-volta install node@16
-volta install yarn
-yarn global add npm-ls-scripts
 # zsh
 zsh ~/.zshrc
 
@@ -76,13 +53,3 @@ if [ ! -d "$ZSH_THEMES_DIR/powerlevel10k" ]; then
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git
   cd "$HOME"
 fi
-
-
-mkdir -p ~/Code/CoveMB/Active
-mkdir -p ~/Code/CoveMB/Archive
-mkdir -p ~/Code/CoveMB/Boilerplates
-mkdir -p ~/Code/CoveMB/NPM
-mkdir -p ~/Code/Notebooks
-mkdir -p ~/Code/Sandboxes
-mkdir -p ~/Code/Softwares\&Drivers
-mkdir -p ~/Code/CoveMB/Dockerfiles

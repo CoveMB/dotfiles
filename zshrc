@@ -1,3 +1,5 @@
+export HISTFILE=$HOME/.zsh_history
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -33,10 +35,11 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+export NODE_OPTIONS=--max-old-space-size=12288
 
 # $(yarn global bin)
 # PATH
-export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/bjmrq/.local/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${VOLTA_HOME}/bin:${PATH}"
+export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/CoveMB/.local/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${VOLTA_HOME}/bin:${PATH}"
 
 # Defender M1 support
 export CPLUS_INCLUDE_PATH=/opt/homebrew/include
@@ -63,8 +66,8 @@ export LD_LIBRARY_PATH="/usr/local/lib"
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 # . <(denon --completion)
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/terraform terraform
+# autoload -U +X bashcompinit && bashcompinit
+# complete -o nospace -C /usr/bin/terraform terraform
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -77,12 +80,12 @@ complete -o nospace -C /usr/bin/terraform terraform
 
 #Platformsh
 # BEGIN SNIPPET: Platform.sh CLI configuration
-# HOME=${HOME:-'/home/bjmrq'}
+# HOME=${HOME:-'/home/CoveMB'}
 # export PATH="$HOME/"'.platformsh/bin':"$PATH"
 # if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
 
 # Deno
-# export DENO_INSTALL="/home/bjmrq/.deno"
+# export DENO_INSTALL="/home/CoveMB/.deno"
 
 # Load rbenv if installed
 # export PATH="${HOME}/.rbenv/bin:${PATH}"

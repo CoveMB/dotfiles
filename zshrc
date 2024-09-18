@@ -34,12 +34,14 @@ unalias rm # No interactive rm by default (brought by plugins/common-aliases)
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-export NODE_OPTIONS=--max-old-space-size=12288
+# export PATH="$VOLTA_HOME/bin:$PATH"
+# export NODE_OPTIONS="--max-old-space-size=18432 --openssl-legacy-provider"
+NODE_OPTIONS="--max-old-space-size=18432 "
 
 # $(yarn global bin)
 # PATH
 export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/CoveMB/.local/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${VOLTA_HOME}/bin:${PATH}"
+
 
 # Defender M1 support
 export CPLUS_INCLUDE_PATH=/opt/homebrew/include

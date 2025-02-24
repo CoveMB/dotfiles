@@ -38,6 +38,8 @@ export VOLTA_HOME="$HOME/.volta"
 # export NODE_OPTIONS="--max-old-space-size=18432 --openssl-legacy-provider"
 NODE_OPTIONS="--max-old-space-size=18432 "
 
+export STRIPE_KEY=sk_test_51NAyPuBvEEaLeEtM6focYBzTWDQChevWY9gI4QLXZ8ZZLHrDjRGbxSMTb6psib2U1oASd2JRs5nqhMFg6azp05yY00TbSXLs4z
+
 # $(yarn global bin)
 # PATH
 export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/CoveMB/.local/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${VOLTA_HOME}/bin:${PATH}"

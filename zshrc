@@ -1,3 +1,19 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/CoveMB/completions:"* ]]; then export FPATH="/Users/CoveMB/completions:$FPATH"; fi
+
+setopt APPEND_HISTORY        # Append, don’t overwrite history
+setopt SHARE_HISTORY         # Share history across terminals
+setopt INC_APPEND_HISTORY    # Write history immediately
+setopt HIST_IGNORE_ALL_DUPS  # Remove older duplicates
+setopt HIST_REDUCE_BLANKS    # Trim extra spaces
+setopt HIST_EXPIRE_DUPS_FIRST
+
+# Number of commands kept in memory
+HISTSIZE=250000
+
+# Number of commands saved to the history file
+SAVEHIST=250000
+
 export HISTFILE=$HOME/.zsh_history
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -38,10 +54,9 @@ export VOLTA_HOME="$HOME/.volta"
 # export NODE_OPTIONS="--max-old-space-size=18432 --openssl-legacy-provider"
 NODE_OPTIONS="--max-old-space-size=18432 "
 
-
 # $(yarn global bin)
 # PATH
-export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/CoveMB/.local/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${VOLTA_HOME}/bin:${PATH}"
+export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/CoveMB/.local/bin:/.cargo/env:/.cargo/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${VOLTA_HOME}/bin:${PATH}"
 
 
 # Defender M1 support
@@ -99,3 +114,13 @@ export LD_LIBRARY_PATH="/usr/local/lib"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+
+# Created by `pipx` on 2025-03-12 13:31:24
+export PATH="$PATH:/Users/CoveMB/.local/bin"
+. "/Users/CoveMB/.deno/env"
+# Initialize zsh completions (added by deno install script)
+autoload -Uz compinit
+compinit
+# Added by Windsurf
+export PATH="/Users/CoveMB/.codeium/windsurf/bin:$PATH"
+export PATH="$HOME/.keploy/bin:$PATH"

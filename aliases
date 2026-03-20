@@ -110,7 +110,9 @@ alias gitremove="rm -rf .git"
 alias gdevelopm="git checkout develop && git pull origin develop"
 alias gstash="git stash"
 alias gitstashp="git stash pop"
-alias gcu="git fetch upstream && git merge upstream/$(git remote show upstream | awk '/HEAD branch/ {print $NF}')"
+alias gcod='git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@")'
+alias gmup='git fetch upstream && git merge upstream/$(git remote show upstream | awk "/HEAD branch/ {print \$NF}")'
+
 
 alias gacmf="yarn format && git add --all && git commit -m"
 
@@ -201,6 +203,8 @@ alias kga="kubectl get all"
 # OpenZeppelin
 alias switchprod=". ~/Code/CoveMB/OpenZeppelin/defender/hack/switch_aws_envs/defender-sts.sh --env prod "
 alias switchdev=". ~/Code/CoveMB/OpenZeppelin/defender/hack/switch_aws_envs/defender-sts.sh "
+alias logdev="aws sso login --profile dev && switchdev"
+alias logprod="aws sso login --profile prod && switchprod"
 alias hrs="gooz && cd ./hedera-json-rpc-relay && dcu"
 alias instack="AWS_PROFILE=zeppelin-solutions yarn dev:run-in-stack "
 alias stginstack="stgyarn dev:run-in-stack "
@@ -220,3 +224,4 @@ alias prodload="prodyarn deploy:load"
 alias devload="AWS_PROFILE=zeppelin-solutions yarn deploy:load"
 alias devui="yarn dev:ui"
 alias devapi="yarn dev:api"
+alias devrelayer="docker run -d --name redis -p 6379:6379 redis:latest && cargo watch -x run"

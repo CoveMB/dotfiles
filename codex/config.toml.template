@@ -1,0 +1,35 @@
+model = "gpt-5.6-sol"
+model_reasoning_effort = "xhigh"
+personality = "pragmatic"
+approval_policy = "on-request"
+
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+
+[features]
+hooks = true
+js_repl = false
+memories = true
+
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 2
+default_subagent_reasoning_effort = "xhigh"
+max_depth = 1
+
+[desktop]
+sansFontSize = 13
+usePointerCursors = true
+followUpQueueMode = "queue"
+preventSleepWhileRunning = true
+keepRemoteControlAwakeWhilePluggedIn = true
+git-commit-instructions = "commit message should be clear and short use best practice commit message"
+conversationDetailMode = "STEPS_COMMANDS"
+selected-avatar-id = "null-signal"
+open-local-url-in-target-preference = "external-browser"
+dock-icon-preference = "codex-system"
+realtimeVoiceScreenContextEnabled = true
+
+[desktop.open-in-target-preferences]
+global = "vscode"

@@ -15,7 +15,6 @@ brew install docker --cask
 
 # AI
 brew install rtk
-rtk init -g --codex
 
 # Office
 brew install slack
@@ -57,6 +56,9 @@ for name in *; do
 done
 
 ln -s "$PWD/.p10k.zsh" "~/"
+
+DOTFILES_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+"$DOTFILES_ROOT/setup-codex.sh"
 
 
 CURRENT_DIR=`pwd`

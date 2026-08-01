@@ -1,0 +1,32 @@
+{
+  "name": "local-personal-codex-plugins",
+  "interface": {
+    "displayName": "Local Personal Codex Plugins"
+  },
+  "plugins": [
+    {
+      "name": "humanizer-plugin",
+      "source": {
+        "source": "local",
+        "path": "./Code/CoveMB/humanizer-plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "accessible-reading-writing-plugin",
+      "source": {
+        "source": "local",
+        "path": "./Code/CoveMB/accessible-reading-writing-plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

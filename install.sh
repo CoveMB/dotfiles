@@ -42,6 +42,9 @@ done
 
 ln -s "$PWD/.p10k.zsh" "~/"
 
+DOTFILES_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+"$DOTFILES_ROOT/setup-codex.sh"
+
 # REGULAR="\\033[0;39m"
 # YELLOW="\\033[1;33m"
 # GREEN="\\033[1;32m"

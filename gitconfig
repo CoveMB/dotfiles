@@ -65,3 +65,5 @@
 	format = ssh
 [commit]
 	gpgsign = true
+[coderabbit]
+	machineId = cli/ef15d5ebc4d047a38ab7e67f021ca28b

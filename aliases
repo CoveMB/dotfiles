@@ -94,6 +94,7 @@ alias gcpc="git cherry-pick --continue"
 alias gploall="ls | xargs -I{} git -C {} pull origin master"
 alias gpso="git push origin"
 alias gpsu="git push --set-upstream"
+alias gplu="git pull upstream"
 alias gp="git push"
 alias greseth="git reset --hard"
 alias gresethmaster="git reset --hard FETCH_HEAD"
@@ -112,6 +113,75 @@ alias gstash="git stash"
 alias gitstashp="git stash pop"
 alias gcod='git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@")'
 alias gmup='git fetch upstream && git merge upstream/$(git remote show upstream | awk "/HEAD branch/ {print \$NF}")'
+
+gws() {
+  if [ "$#" -ne 1 ]; then
+    echo "Usage: gws <branch>" >&2
+    return 2
+  fi
+
+  local branch="$1"
+  local branch_ref="refs/heads/$branch"
+  local current_branch
+  local current_status
+  local target_status
+  local target_worktree
+
+  if ! git rev-parse --show-toplevel >/dev/null 2>&1; then
+    echo "gws: current directory is not inside a Git repository." >&2
+    return 1
+  fi
+
+  current_branch=$(git branch --show-current) || return 1
+  if [ "$current_branch" = "$branch" ]; then
+    return 0
+  fi
+
+  if ! git show-ref --verify --quiet "$branch_ref"; then
+    echo "gws: local branch '$branch' does not exist." >&2
+    return 1
+  fi
+
+  if ! current_status=$(git status --porcelain); then
+    echo "gws: could not inspect the current worktree." >&2
+    return 1
+  fi
+  if [ -n "$current_status" ]; then
+    echo "gws: current worktree has uncommitted changes; refusing to switch." >&2
+    return 1
+  fi
+
+  target_worktree=$(
+    git worktree list --porcelain | awk -v branch_ref="$branch_ref" '
+      /^worktree / { worktree = substr($0, 10) }
+      /^branch / && substr($0, 8) == branch_ref { print worktree; exit }
+    '
+  ) || return 1
+
+  if [ -n "$target_worktree" ]; then
+    if ! target_status=$(git -C "$target_worktree" status --porcelain); then
+      echo "gws: could not inspect worktree '$target_worktree'." >&2
+      return 1
+    fi
+    if [ -n "$target_status" ]; then
+      echo "gws: branch '$branch' is checked out in a dirty worktree at '$target_worktree'; refusing to remove it." >&2
+      return 1
+    fi
+    git worktree remove "$target_worktree" || return 1
+  fi
+
+  if git switch "$branch"; then
+    return 0
+  fi
+
+  if [ -n "$target_worktree" ]; then
+    echo "gws: switch failed; restoring worktree '$target_worktree'." >&2
+    if ! git worktree add "$target_worktree" "$branch"; then
+      echo "gws: failed to restore worktree '$target_worktree'." >&2
+    fi
+  fi
+  return 1
+}
 
 
 alias gacmf="yarn format && git add --all && git commit -m"

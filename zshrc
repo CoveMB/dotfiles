@@ -56,7 +56,7 @@ NODE_OPTIONS="--max-old-space-size=18432 "
 
 # $(yarn global bin)
 # PATH
-export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/CoveMB/.local/bin:/.cargo/env:/.cargo/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${VOLTA_HOME}/bin:${PATH}"
+export PATH="./bin:./node_modules/.bin:/usr/local/bin:/home/CoveMB/.local/bin:/.cargo/env:/.cargo/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${VOLTA_HOME}/bin:$HOME/Library/TinyTeX/bin/universal-darwin:${PATH}"
 
 
 # Defender M1 support

@@ -13,6 +13,10 @@ xcode-select --install
 brew install --cask iterm2 zsh visual-studio-code git volta
 brew install docker --cask
 
+# AI
+brew install rtk
+rtk init -g --codex
+
 # Office
 brew install slack
 

@@ -1,6 +1,8 @@
 name = "bounded_explorer"
-description = "Read-only explorer for tracing code paths and dependencies. Prefer Terra/high; escalate to Sol/xhigh for ambiguous, cross-system, or high-risk analysis."
+description = "Read-only explorer for tracing code paths and dependencies."
 sandbox_mode = "read-only"
+model = "gpt-6-astra"
+model_reasoning_effort = "xhigh"
 
 developer_instructions = """
 Inspect only the assigned paths, symbols, behavior, or question.

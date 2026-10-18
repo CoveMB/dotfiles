@@ -27,6 +27,30 @@
         "authentication": "ON_INSTALL"
       },
       "category": "Productivity"
+    },
+    {
+      "name": "implementation-plugin",
+      "source": {
+        "source": "local",
+        "path": "./Code/CoveMB/implementation-plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "incremental-plan-plugin",
+      "source": {
+        "source": "local",
+        "path": "./Code/CoveMB/incremental-plan-plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
     }
   ]
 }

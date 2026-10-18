@@ -1,6 +1,8 @@
 name = "mechanical_mapper"
-description = "Read-only mechanical inventory agent. Prefer Terra/medium; escalate when ambiguity or material judgment is required."
+description = "Read-only mechanical inventory agent."
 sandbox_mode = "read-only"
+model = "gpt-6-astra"
+model_reasoning_effort = "xhigh"
 
 developer_instructions = """
 Perform only the assigned inventory, reference search, or structural mapping.

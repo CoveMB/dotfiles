@@ -1,6 +1,6 @@
 name = "implementation_worker"
 description = "Quality-first implementation agent for an exact approved change scope."
-model = "gpt-5.6-sol"
+model = "gpt-6-astra"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "workspace-write"
 

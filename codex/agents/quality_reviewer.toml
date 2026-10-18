@@ -1,6 +1,6 @@
 name = "quality_reviewer"
 description = "Read-only, high-confidence reviewer for material correctness, security, compatibility, regression, and test-protection risks."
-model = "gpt-5.6-sol"
+model = "gpt-6-astra"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "read-only"
 

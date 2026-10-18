@@ -115,71 +115,201 @@ alias gcod='git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed "s@^r
 alias gmup='git fetch upstream && git merge upstream/$(git remote show upstream | awk "/HEAD branch/ {print \$NF}")'
 
 gws() {
-  if [ "$#" -ne 1 ]; then
-    echo "Usage: gws <branch>" >&2
+  emulate -L zsh
+
+  if (( $# != 1 )); then
+    print -u2 -r -- "Usage: gws <branch>"
     return 2
   fi
 
   local branch="$1"
   local branch_ref="refs/heads/$branch"
+  local current_root
   local current_branch
   local current_status
   local target_status
-  local target_worktree
+  local target_worktree=""
+  local target_ref
+  local target_head
+  local branch_head
+  local candidate=""
+  local record
+  local -a worktree_records
+  local -i target_count=0
 
-  if ! git rev-parse --show-toplevel >/dev/null 2>&1; then
-    echo "gws: current directory is not inside a Git repository." >&2
+  current_root=$(git rev-parse --show-toplevel 2>/dev/null) || {
+    print -u2 -r -- \
+      "gws: current directory is not inside a Git worktree."
+    return 1
+  }
+
+  # Validate the exact ref that this function will use. Unlike
+  # --branch, this does not interpret @{-1} as a previous branch.
+  if ! git check-ref-format "$branch_ref" >/dev/null 2>&1; then
+    print -u2 -r -- "gws: invalid branch name '$branch'."
     return 1
   fi
 
-  current_branch=$(git branch --show-current) || return 1
-  if [ "$current_branch" = "$branch" ]; then
+  if ! git -C "$current_root" show-ref \
+    --verify --quiet "$branch_ref"
+  then
+    print -u2 -r -- "gws: local branch '$branch' does not exist."
+    return 1
+  fi
+
+  current_branch=$(
+    git -C "$current_root" branch --show-current
+  ) || {
+    print -u2 -r -- "gws: could not inspect the current branch."
+    return 1
+  }
+
+  if [[ "$current_branch" == "$branch" ]]; then
+    print -u2 -r -- "gws: '$branch' is already checked out here."
     return 0
   fi
 
-  if ! git show-ref --verify --quiet "$branch_ref"; then
-    echo "gws: local branch '$branch' does not exist." >&2
+  current_status=$(
+    git -C "$current_root" status \
+      --porcelain=v1 \
+      --untracked-files=all \
+      --ignore-submodules=none
+  ) || {
+    print -u2 -r -- "gws: could not inspect the current worktree."
+    return 1
+  }
+
+  if [[ -n "$current_status" ]]; then
+    print -u2 -r -- \
+      "gws: current worktree has uncommitted changes; refusing to switch."
     return 1
   fi
 
-  if ! current_status=$(git status --porcelain); then
-    echo "gws: could not inspect the current worktree." >&2
-    return 1
-  fi
-  if [ -n "$current_status" ]; then
-    echo "gws: current worktree has uncommitted changes; refusing to switch." >&2
+  # NUL-delimited output preserves paths containing whitespace or
+  # characters that Git would otherwise quote.
+  if ! worktree_records=(
+    "${(@0)$(git -C "$current_root" worktree list --porcelain -z)}"
+  ); then
+    print -u2 -r -- "gws: could not inspect registered worktrees."
     return 1
   fi
 
-  target_worktree=$(
-    git worktree list --porcelain | awk -v branch_ref="$branch_ref" '
-      /^worktree / { worktree = substr($0, 10) }
-      /^branch / && substr($0, 8) == branch_ref { print worktree; exit }
-    '
+  for record in "${worktree_records[@]}"; do
+    if [[ "$record" == worktree\ * ]]; then
+      candidate="${record#worktree }"
+    elif [[ "$record" == "branch $branch_ref" ]]; then
+      (( ++target_count ))
+      target_worktree="$candidate"
+    fi
+  done
+
+  if (( target_count > 1 )); then
+    print -u2 -r -- \
+      "gws: '$branch' is registered in multiple worktrees; refusing to choose one."
+    return 1
+  fi
+
+  # The branch is not attached elsewhere, so a normal switch is enough.
+  if (( target_count == 0 )); then
+    git -C "$current_root" switch \
+      --no-guess \
+      --no-overwrite-ignore \
+      -- "$branch"
+    return $?
+  fi
+
+  target_status=$(
+    git -C "$target_worktree" status \
+      --porcelain=v1 \
+      --untracked-files=all \
+      --ignore-submodules=none
+  ) || {
+    print -u2 -r -- \
+      "gws: could not inspect worktree '$target_worktree'."
+    return 1
+  }
+
+  if [[ -n "$target_status" ]]; then
+    print -u2 -r -- \
+      "gws: '$branch' is checked out in a dirty worktree:"
+    print -u2 -r -- "     $target_worktree"
+    return 1
+  fi
+
+  # Revalidate the association immediately before changing it.
+  target_ref=$(
+    git -C "$target_worktree" symbolic-ref --quiet HEAD
+  ) || {
+    print -u2 -r -- \
+      "gws: target worktree is no longer on a branch."
+    return 1
+  }
+
+  if [[ "$target_ref" != "$branch_ref" ]]; then
+    print -u2 -r -- \
+      "gws: target worktree changed branches during inspection."
+    return 1
+  fi
+
+  target_head=$(
+    git -C "$target_worktree" rev-parse --verify 'HEAD^{commit}'
   ) || return 1
 
-  if [ -n "$target_worktree" ]; then
-    if ! target_status=$(git -C "$target_worktree" status --porcelain); then
-      echo "gws: could not inspect worktree '$target_worktree'." >&2
-      return 1
-    fi
-    if [ -n "$target_status" ]; then
-      echo "gws: branch '$branch' is checked out in a dirty worktree at '$target_worktree'; refusing to remove it." >&2
-      return 1
-    fi
-    git worktree remove "$target_worktree" || return 1
+  branch_head=$(
+    git -C "$current_root" rev-parse \
+      --verify "${branch_ref}^{commit}"
+  ) || return 1
+
+  if [[ "$target_head" != "$branch_head" ]]; then
+    print -u2 -r -- \
+      "gws: target HEAD no longer matches '$branch'; refusing to detach."
+    return 1
   fi
 
-  if git switch "$branch"; then
+  if ! git -C "$target_worktree" switch \
+    --no-overwrite-ignore \
+    --detach \
+    "$target_head"
+  then
+    print -u2 -r -- "gws: could not detach '$target_worktree'."
+    return 1
+  fi
+
+  if git -C "$current_root" switch \
+    --no-guess \
+    --no-overwrite-ignore \
+    -- "$branch"
+  then
+    print -u2 -r -- "gws: switched to '$branch'."
+    print -u2 -r -- \
+      "gws: old worktree retained, detached at $target_head:"
+    print -u2 -r -- "     $target_worktree"
+    print -u2 -r -- "gws: inspect and remove it manually when ready:"
+    print -u2 -r -- \
+      "     git -C ${(q)target_worktree} status --short --ignored"
+    print -u2 -r -- \
+      "     git worktree remove ${(q)target_worktree}"
     return 0
   fi
 
-  if [ -n "$target_worktree" ]; then
-    echo "gws: switch failed; restoring worktree '$target_worktree'." >&2
-    if ! git worktree add "$target_worktree" "$branch"; then
-      echo "gws: failed to restore worktree '$target_worktree'." >&2
-    fi
+  print -u2 -r -- \
+    "gws: switch failed; attempting to restore '$branch'."
+
+  if git -C "$target_worktree" switch \
+    --no-guess \
+    --no-overwrite-ignore \
+    -- "$branch"
+  then
+    print -u2 -r -- \
+      "gws: original worktree association restored."
+  else
+    print -u2 -r -- \
+      "gws: WARNING: automatic restoration failed."
+    print -u2 -r -- \
+      "gws: inspect both worktrees; the released checkout was detached at:"
+    print -u2 -r -- "     $target_head"
   fi
+
   return 1
 }
 

@@ -5,7 +5,7 @@
 brew install --cask brave-browser spotify
 
 # Utils
-brew install --cask dockmate keybase rectangle bartender
+brew install --cask dockmate keybase rectangle bartender localsend
 
 xcode-select --install
 

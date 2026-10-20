@@ -57,9 +57,8 @@ When authoring or updating skills, keep discovery descriptions to task triggers 
 
 ### Ponytail
 
-- Ponytail is explicit-only, except that @ponytail-review may run when an applicable user-approved concrete implementation plan explicitly includes that read-only review for a bounded candidate. Plan approval supplies review-invocation permission, subject to other applicable action permissions.
-- Other Ponytail skills and modes, including @ponytail-audit, require an explicit user request.
-- Keep implementation modes off unless explicitly enabled. Treat their output as unverified complexity-focused evidence and validate every finding against current code before recommending/applying it. They do not replace correctness, security, accessibility, architecture, migration, or merge-readiness review. Applying fixes requires a separate explicit request.
+- Ponytail is explicit-only
+
 
 ## 5. Security and Privacy
 
@@ -70,6 +69,8 @@ When authoring or updating skills, keep discovery descriptions to task triggers 
 - When risk exists, prefer reversible, inspectable, logged actions. Never weaken security/privacy for convenience without explicit authorization and a clear risk explanation.
 
 ## 6. Testing, Reliability, and Review
+
+- Unless explicitly requested as read-only or report-only, a review request includes fixing verified, material, in-scope findings and running relevant checks after changes. Keep independent reviewers read-only; the implementing agent owns fixes. Explain rejected or deferred findings, and stop for material design decisions or additional authorization. If a commit is requested, resolve all confirmed material findings before committing.
 
 - Do not write tests for everything, single CI fixes, or changes whose tests would not meaningfully catch future regressions; write tests only for application paths. Prefer tests of observable behavior and stable contracts; avoid tests merely matching source text, restating configuration, or mocking the same implementation logic. Add/update tests when needed to verify requested behavior or prevent likely regressions.
 
@@ -82,6 +83,8 @@ When authoring or updating skills, keep discovery descriptions to task triggers 
 - Prioritize merge readiness over perfection and done over remaining changes that are low-impact, speculative, or not worth the churn. Verify findings against current code/artifacts before recommending remediation. Report only material findings with concrete evidence, meaningful impact, and benefit clearly outweighing churn/regression risk. Do not invent issues or elevate minor preferences. With no material findings, say: “No material improvements recommended.”
 
 - At most one bounded final reviewer per coherent task unless that reviewer finds a material defect; no repeated delegated reviews of unchanged code.
+
+- For CodeRabbit reviews launched through Codex skills or plugins, include `--deep` by default (`coderabbit review --deep --agent`), retaining the requested scope, base and configuration. Use a lighter mode only when explicitly requested. If the installed CLI or server does not support `--deep`, report the limitation rather than silently falling back.
 
 ## 7. Documentation and Evidence
 
@@ -103,7 +106,7 @@ When authoring or updating skills, keep discovery descriptions to task triggers 
 
 - Use tools only to materially improve accuracy, verification, or completion, with minimum access and scope.
 
-- Answer, explanation, review, diagnosis, and planning requests authorize no edits/external mutations unless also requested. Change/build requests authorize necessary bounded local implementation and verification, not unrelated changes, commits, pushes, publication, messages, permission changes, production actions, or other external effects.
+- Answer, explanation, diagnosis, and planning requests authorize no edits/external mutations unless also requested. Review requests follow Section 6. Change/build requests authorize necessary bounded local implementation and verification, not unrelated changes, commits, pushes, publication, messages, permission changes, production actions, or other external effects.
 
 - Before irreversible, broad, expensive, privacy-sensitive, destructive, or external actions, provide a plan/preview/diff and obtain explicit confirmation. Explicit human confirmation is required to modify external systems, delete data, send messages, spend money, expose private information, change permissions, transmit private source material, or affect production. Propose rollback/recovery before risky changes when possible.
 

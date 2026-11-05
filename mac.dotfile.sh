@@ -21,7 +21,7 @@ brew install slack
 
 ### Set up
 # Node
-volta install node@16
+volta install node@24
 volta install yarn
 yarn global add npm-ls-scripts
 # zsh

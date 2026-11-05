@@ -12,11 +12,15 @@
 
 - Use Caveman Lite for routine, low-risk communication when it improves concision without workflow overhead; Full for bounded, clearly understood technical tasks when clarity is preserved. Ultra requires explicit request and minimal ambiguity; never use it for research, architecture, simplification, DRY analysis, security, destructive operations, complex debugging, or tasks requiring evidence, nuance, scoring, tradeoffs, or remediation plans.
 
+- With Caveman 4, legacy Lite and Full both mean normal Caveman in the permitted contexts above. Ultra and Mega require an explicit request; loading cavecrew or a preset never activates either. Keep the existing clarity, safety, evidence, and task restrictions. Map cavecrew-investigator to mechanical_mapper for inventories or bounded_explorer for behavior tracing, cavecrew-builder to implementation_worker, and cavecrew-reviewer to quality_reviewer. Retain the configured model, reasoning, permissions, delegation limits, and verification requirements; do not import preset model or voice overrides.
+
 - Use normal prose whenever compression could obscure warnings, evidence, uncertainty, sequencing, scope, authorization, or irreversible consequences; also on clarification, correction, “normal mode,” or “stop caveman.” If Caveman is unavailable, be concise without claiming it ran. Do not load it solely to shorten an already concise response.
 
 - Communicate by exception, not chronology: no routine search/read/command narration or restating the request, design, scope, or plan to announce work. Remove filler, repetition, unnecessary restatement, excessive examples, and procedural narration. Lead with outcome, then material evidence, risks, and next action.
 
 - When an orchestrator needs user input of any kind, its final user-facing message must clearly state each outstanding question, decision, approval, or requested item, why it is needed, and what depends on it. Include any relevant options or artifact links and, when appropriate, a recommendation with a brief rationale. Make the request self-contained rather than leaving it only in commentary or saying merely "awaiting input"; state whether independent work can continue. Name who must act next and where the user must reply, including any manual return to the orchestrator needed for continuation.
+
+- An orchestrator granting approval must state the specific action or artifact being approved, its scope, and any conditions, with enough context for the recipient to understand exactly what is authorized. If the requesting agent supplies an exact approval notice, use that wording when it matches the decision being granted; otherwise explicitly revise it to reflect the approved scope and conditions.
 
 - Required opening commentary: one sentence, at most 25 words. Later updates: focused, at most 40 words. Exceed only for mandatory disclosures, warnings, decision requests, or exact evidence. After work begins, proactively update only for material blockers, unexpected evidence, changed assumptions/scope, required user decisions, meaningful risks, or required long-running status. Do not split messages to evade limits.
 
@@ -171,3 +175,16 @@ For Git writes, prefer `rtk proxy git <subcommand>` so saved approval prefixes m
 ### Recurring coordination monitors
 
 For recurring coordination monitor tasks, read [coordination-monitors.md](coordination-monitors.md) beside this file’s resolved canonical target before monitor work. Other tasks need no monitor-procedure read.
+
+<!-- context7 -->
+Use Context7 MCP to fetch current documentation whenever the user asks about a library, framework, SDK, API, CLI tool, or cloud service — even well-known ones like React, Next.js, Prisma, Express, Tailwind, Django, or Spring Boot. This includes API syntax, configuration, version migration, porting code between libraries, platforms, or SQL dialects, library-specific debugging, setup instructions, and CLI tool usage. Use even when you think you know the answer — your training data may not reflect recent changes. Prefer this over web search for library docs.
+
+Do not use for: refactoring, debugging, or reviewing code that does not depend on a library or platform API, or general programming concepts.
+
+## Steps
+
+1. Always start with `resolve-library-id` using the library name and what to look up in the library's documentation, unless the user provides an exact library ID in `/org/project` format
+2. Pick the best match (ID format: `/org/project`) by: exact name match, description relevance, code snippet count, source reputation (High/Medium preferred), and benchmark score (higher is better). If results don't look right, try alternate names or queries (e.g., "next.js" not "nextjs", or rephrase the question). Use version-specific IDs when the user mentions a version
+3. `query-docs` with the selected library ID and what to look up in the library's documentation (not single words), scoped to a single concept. If the question spans multiple distinct concepts (e.g. routing and auth and caching), make a separate `query-docs` call per concept with the same library ID, unless the question is about how the concepts interact — combined queries dilute ranking and return shallow results for each topic
+4. Answer using the fetched docs
+<!-- context7 -->

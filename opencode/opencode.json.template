@@ -1,0 +1,40 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "share": "disabled",
+  "warming": false,
+  "plugins": ["-opencode.browser"],
+  "commands": {
+    "material-review": {
+      "description": "Review a Git change with the material review workflow",
+      "template": "Load the native material-code-review skill and follow its trusted-workspace prerequisite and user gates. Requested scope: $ARGUMENTS"
+    },
+    "material-simplify": {
+      "description": "Use the gated material simplification workflow",
+      "template": "Load the native material-code-simplification skill and follow its trusted-workspace prerequisite and user gates. Requested scope: $ARGUMENTS"
+    }
+  },
+  "permissions": [
+    {"action": "*", "resource": "*", "effect": "ask"},
+    {"action": "read", "resource": "*", "effect": "allow"},
+    {"action": "glob", "resource": "*", "effect": "allow"},
+    {"action": "grep", "resource": "*", "effect": "allow"},
+    {"action": "skill", "resource": "*", "effect": "allow"},
+    {"action": "webfetch", "resource": "*", "effect": "allow"},
+    {"action": "websearch", "resource": "*", "effect": "allow"},
+    {"action": "question", "resource": "*", "effect": "allow"},
+    {"action": "read", "resource": "*.env", "effect": "ask"},
+    {"action": "read", "resource": "*.env.*", "effect": "ask"},
+    {"action": "read", "resource": "*.env.example", "effect": "allow"},
+    {"action": "shell", "resource": "*", "effect": "ask"},
+    {"action": "edit", "resource": "*", "effect": "ask"},
+    {"action": "external_directory", "resource": "*", "effect": "ask"},
+    {"action": "execute", "resource": "*", "effect": "deny"},
+    {"action": "browser*", "resource": "*", "effect": "deny"},
+    {"action": "subagent", "resource": "*", "effect": "deny"}
+  ],
+  "policies": [
+    {"action": "tool.use", "resource": "execute:*", "effect": "deny"},
+    {"action": "tool.use", "resource": "browser*:*", "effect": "deny"}
+  ],
+  "experimental": {"subagent_depth": 1, "schedules": false, "artifacts": false}
+}

@@ -8,7 +8,7 @@
       "name": "humanizer-plugin",
       "source": {
         "source": "local",
-        "path": "./Code/CoveMB/humanizer-plugin"
+        "path": "./.local/share/agent-plugin-sources/2026-11-04-main/marketplaces/local-personal-codex-plugins/plugins/humanizer-plugin"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -29,22 +29,10 @@
       "category": "Productivity"
     },
     {
-      "name": "implementation-plugin",
+      "name": "incremental-and-test-plans",
       "source": {
         "source": "local",
-        "path": "./Code/CoveMB/implementation-plugin"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Productivity"
-    },
-    {
-      "name": "incremental-plan-plugin",
-      "source": {
-        "source": "local",
-        "path": "./Code/CoveMB/incremental-plan-plugin"
+        "path": "./.local/share/agent-plugin-sources/2026-11-04-main/marketplaces/local-personal-codex-plugins/plugins/incremental-and-test-plans"
       },
       "policy": {
         "installation": "AVAILABLE",

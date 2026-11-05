@@ -2,6 +2,14 @@ model = "gpt-6-astra"
 model_reasoning_effort = "xhigh"
 personality = "pragmatic"
 approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+sandbox_mode = "workspace-write"
+web_search = "live"
+model_verbosity = "low"
+service_tier = "default"
+
+[sandbox_workspace_write]
+network_access = true
 
 [mcp_servers.context7]
 command = "npx"
@@ -11,6 +19,7 @@ args = ["-y", "@upstash/context7-mcp"]
 hooks = true
 js_repl = false
 memories = true
+multi_agent = true
 
 [agents]
 enabled = true
@@ -24,12 +33,17 @@ usePointerCursors = true
 followUpQueueMode = "queue"
 preventSleepWhileRunning = true
 keepRemoteControlAwakeWhilePluggedIn = true
+git-branch-prefix = ""
 git-commit-instructions = "commit message should be clear and short use best practice commit message"
 conversationDetailMode = "STEPS_COMMANDS"
 selected-avatar-id = "null-signal"
 open-local-url-in-target-preference = "external-browser"
 dock-icon-preference = "codex-system"
 realtimeVoiceScreenContextEnabled = true
+ambient-suggestions-enabled = false
+show-context-window-usage = true
+worktree-upstream-refresh-mode = "best-effort"
+defaultTerminalLocation = "bottom"
 
 [desktop.open-in-target-preferences]
 global = "vscode"

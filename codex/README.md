@@ -16,7 +16,7 @@ It is safe to run more than once and is called by both new-computer install scri
   Restore those source directories before installing their plugins on a new machine.
 - `config.toml.template` contains portable Codex defaults. The setup script copies
   it to `~/.codex/config.toml` only when that file does not already exist.
-  The template intentionally keeps `gpt-6-astra`; an existing machine can select
+  The template intentionally keeps `gpt-6.1-sol`; an existing machine can select
   another model locally.
 
 The machine-local `~/.codex/RTK.md`, when retained, is a compatibility pointer to

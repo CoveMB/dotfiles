@@ -14,6 +14,11 @@ brew install --cask iterm2 zsh visual-studio-code git volta
 brew install docker --cask
 
 # AI
+brew install ollama
+# Review latest model
+# ollama pull qwen3.8:27b-q4_K_M
+# ollama launch opencode --model qwen3.8:27b-q4_K_M
+
 brew install rtk
 
 # Office

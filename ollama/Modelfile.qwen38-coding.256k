@@ -1,0 +1,3 @@
+FROM qwen38-coding:speed.192k.context
+
+PARAMETER num_ctx 262144

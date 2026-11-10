@@ -1,0 +1,188 @@
+{
+  "providers": {
+    "ollama": {
+      "settings": {
+        "baseURL": "http://127.0.0.1:11434/v1"
+      },
+      "models": {
+        "qwen38-coding:speed.192k.context": {
+          "name": "Qwen3.8 27B - speed.192k.context",
+          "limit": {
+            "context": 196608,
+            "output": 32768
+          },
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true
+            }
+          },
+          "compatibility": {
+            "reasoningField": "reasoning",
+            "maxTokensField": "max_tokens"
+          },
+          "body": {
+            "reasoning_effort": "xhigh",
+            "temperature": 1.0,
+            "top_p": 0.95,
+            "presence_penalty": 0.0
+          },
+          "variants": [
+            {
+              "id": "low",
+              "body": {
+                "reasoning_effort": "low"
+              }
+            },
+            {
+              "id": "medium",
+              "body": {
+                "reasoning_effort": "medium"
+              }
+            },
+            {
+              "id": "xhigh",
+              "body": {
+                "reasoning_effort": "xhigh"
+              }
+            },
+            {
+              "id": "none",
+              "body": {
+                "reasoning_effort": "none",
+                "temperature": 0.7,
+                "top_p": 0.8,
+                "presence_penalty": 1.5
+              }
+            }
+          ]
+        },
+        "qwen38-coding:hight.224k.context": {
+          "name": "Qwen3.8 27B - hight.224k.context",
+          "limit": {
+            "context": 229376,
+            "output": 32768
+          },
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true
+            }
+          },
+          "compatibility": {
+            "reasoningField": "reasoning",
+            "maxTokensField": "max_tokens"
+          },
+          "body": {
+            "reasoning_effort": "xhigh",
+            "temperature": 1.0,
+            "top_p": 0.95,
+            "presence_penalty": 0.0
+          },
+          "variants": [
+            {
+              "id": "low",
+              "body": {
+                "reasoning_effort": "low"
+              }
+            },
+            {
+              "id": "medium",
+              "body": {
+                "reasoning_effort": "medium"
+              }
+            },
+            {
+              "id": "xhigh",
+              "body": {
+                "reasoning_effort": "xhigh"
+              }
+            },
+            {
+              "id": "none",
+              "body": {
+                "reasoning_effort": "none",
+                "temperature": 0.7,
+                "top_p": 0.8,
+                "presence_penalty": 1.5
+              }
+            }
+          ]
+        },
+        "qwen38-coding:native.256k.context": {
+          "name": "Qwen3.8 27B - native.256k.context",
+          "limit": {
+            "context": 262144,
+            "output": 32768
+          },
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true
+            }
+          },
+          "compatibility": {
+            "reasoningField": "reasoning",
+            "maxTokensField": "max_tokens"
+          },
+          "body": {
+            "reasoning_effort": "xhigh",
+            "temperature": 1.0,
+            "top_p": 0.95,
+            "presence_penalty": 0.0
+          },
+          "variants": [
+            {
+              "id": "low",
+              "body": {
+                "reasoning_effort": "low"
+              }
+            },
+            {
+              "id": "medium",
+              "body": {
+                "reasoning_effort": "medium"
+              }
+            },
+            {
+              "id": "xhigh",
+              "body": {
+                "reasoning_effort": "xhigh"
+              }
+            },
+            {
+              "id": "none",
+              "body": {
+                "reasoning_effort": "none",
+                "temperature": 0.7,
+                "top_p": 0.8,
+                "presence_penalty": 1.5
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -19,7 +19,7 @@ class SetupTest(unittest.TestCase):
         self.root = Path(self.temp.name).resolve()
         self.repo = self.root / "relocated dotfiles"
         self.repo.mkdir()
-        for name in ("opencode", "setup-opencode.sh"):
+        for name in ("opencode", "setup-opencode.sh", "setup_files.py"):
             source = SOURCE / name
             if source.is_dir():
                 shutil.copytree(source, self.repo / name)
@@ -133,6 +133,105 @@ class SetupTest(unittest.TestCase):
         self.assertTrue(config.exists(), "Rollback removed an app replacement created during installation")
         self.assertEqual(config.read_text(), '{"app_owned": true}\n')
         self.assertIn(str(config), result["preserved"])
+
+
+    def load_setup_module(self):
+        spec = importlib.util.spec_from_file_location("setup_fixture", self.repo / "opencode/setup.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module
+
+    def test_app_replacement_during_rollback_is_restored(self):
+        first = self.run_setup()
+        module = self.load_setup_module()
+        config = self.config / "opencode.jsonc"
+        inspect = module.fingerprint
+
+        def replace_after_inspection(path):
+            result = inspect(path)
+            if path == config:
+                replacement = self.config / "app-update"
+                replacement.write_text('"app-owned replacement"')
+                replacement.replace(path)
+            return result
+
+        with patch.object(module, "fingerprint", replace_after_inspection):
+            result = module.rollback(self.manifest(first), False)
+        self.assertTrue(config.exists(), "Rollback deleted a concurrent app replacement")
+        self.assertEqual(config.read_text(), '"app-owned replacement"')
+        self.assertIn(str(config), result["preserved"])
+
+    def test_symlink_retarget_during_rollback_is_restored(self):
+        first = self.run_setup()
+        module = self.load_setup_module()
+        link = self.config / "AGENTS.md"
+        changed_target = self.root / "user-instructions.md"
+        changed_target.write_text("User instructions")
+        inspect = module.fingerprint
+
+        def retarget_after_inspection(path):
+            result = inspect(path)
+            if path == link:
+                replacement = self.config / "app-link"
+                replacement.symlink_to(changed_target)
+                replacement.replace(path)
+            return result
+
+        with patch.object(module, "fingerprint", retarget_after_inspection):
+            result = module.rollback(self.manifest(first), False)
+        self.assertTrue(link.is_symlink(), "Rollback deleted a concurrently retargeted link")
+        self.assertEqual(link.resolve(), changed_target)
+        self.assertIn(str(link), result["preserved"])
+
+    def test_rollback_restoration_never_overwrites_a_new_destination(self):
+        first = self.run_setup()
+        module = self.load_setup_module()
+        config = self.config / "opencode.jsonc"
+        inspect = module.fingerprint
+        move = Path.rename
+
+        def replace_after_inspection(path):
+            result = inspect(path)
+            if path == config:
+                replacement = self.config / "app-update"
+                replacement.write_text('"first app replacement"')
+                replacement.replace(path)
+            return result
+
+        def recreate_after_move(path, destination):
+            result = move(path, destination)
+            if path == config:
+                config.write_text('"second app replacement"')
+            return result
+
+        with patch.object(module, "fingerprint", replace_after_inspection), patch.object(Path, "rename", recreate_after_move):
+            result = module.rollback(self.manifest(first), False)
+        self.assertEqual(config.read_text(), '"second app replacement"')
+        recovered = next(x for x in result["recovery"] if x["path"] == str(config))
+        self.assertEqual(Path(recovered["backup"]).read_text(), '"first app replacement"')
+        self.assertIn(str(config), result["preserved"])
+
+    def test_rollback_retains_writes_through_an_already_open_file(self):
+        first = self.run_setup()
+        module = self.load_setup_module()
+        config = self.config / "opencode.jsonc"
+        with config.open("r+") as app_file:
+            result = module.rollback(self.manifest(first), False)
+            app_file.seek(0)
+            app_file.write('"late app write"')
+            app_file.truncate()
+        self.assertFalse(config.exists())
+        recovered = next(x for x in result["recovery"] if x["path"] == str(config))
+        self.assertEqual(Path(recovered["backup"]).read_text(), '"late app write"')
+
+    def test_missing_protected_roots_cover_future_descendants(self):
+        self.assertFalse((self.home / ".codex").exists())
+        self.assertFalse((self.home / ".agents").exists())
+        self.run_setup()
+        config = json.loads((self.config / "opencode.jsonc").read_text())
+        denied = {x["resource"] for x in config["policies"] if x["action"] == "tool.use" and x["effect"] == "deny"}
+        for root in (self.home / ".codex", self.home / ".agents"):
+            self.assertIn("edit:" + str(root) + "/*", denied)
 
 
 if __name__ == "__main__":

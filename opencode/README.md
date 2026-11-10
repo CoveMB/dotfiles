@@ -113,10 +113,22 @@ rtk proxy sh ./setup-opencode.sh --rollback /absolute/setup-manifest.json
 ```
 
 Rollback checks type, device/inode, mode, link target or content hash. Modified
-or recreated files and unrelated files are retained. Empty created directories
-and the recovery record remain. It does not uninstall plugins, reverse manual
-merges, or remove app state. Plugin rollback is a separate supported reinstall
-from the recorded clean previous runtime source; never reset the whole cache.
+or recreated files and unrelated files are retained. For unchanged additions,
+`removed` means moved out of the active location into a private `.rollback-*`
+directory beneath the configuration root. These entries remain available for
+recovery, including later writes through an application's already-open file.
+
+If an entry changes between inspection and removal, rollback attempts to restore
+it without overwriting a newer destination. Inspect `preserved`, `recovery`, and
+`errors` in the result: every moved entry has its recovery path, and failed
+restoration reports the reason and returns a nonzero exit status. Keep those
+recovery files until their disposition is reviewed. A dry run creates no recovery
+directory.
+
+Rollback does not uninstall plugins, reverse manual merges, or remove app state.
+Empty created directories and ownership records remain. Plugin rollback is a
+separate supported reinstall from the recorded clean previous runtime source;
+never reset the whole cache.
 
 ## Verification
 
@@ -129,3 +141,40 @@ rollback against real disposable files. App-native permission/discovery checks,
 provider authentication, MCP connection and model behavior are separate evidence.
 Use separate worktrees for concurrent writers; never let both apps mutate the
 same checkout simultaneously.
+
+## Local Qwen3.8
+
+The [Qwen fragment](models/qwen38-coding.json) adds three local Qwen3.8 presets:
+`speed.192k.context`, `hight.224k.context` and `native.256k.context`. All use
+**xhigh reasoning by default**, a 32K output ceiling and the same quality settings;
+only context differs. `hight` retains the requested spelling. The 192K choice has
+more memory headroom; larger presets previously raised pressure on this Mac.
+
+Follow the [Ollama guide](../ollama/README.md) for exact IDs, creation order,
+switching, memory tradeoffs and verification limits. The former max selection
+migrates to speed at the same 196,608-token capacity. Old aliases and historical
+messages remain available for recovery; root defaults and agent bindings stay intact.
+
+This fragment is a manual merge input, not an auto-loaded include. Identify the
+Desktop backend's active configuration and overrides first. Keep a private backup,
+then merge only its provider/model keys into the existing regular JSON/JSONC file
+using a JSONC-aware editor. Preserve comments, permissions and unrelated settings;
+recheck the file fingerprint before writing while the app is idle. Do not create
+a second active JSON/JSONC file or symlink the app-managed configuration.
+
+If `providers.ollama` already uses another endpoint or inherited request fields,
+review that conflict before applying. Do not overwrite its credentials or routing.
+An isolated unused provider ID can use the built-in package
+`@opencode/ai/providers/openai-compatible` with `settings.baseURL` and a matching
+`settings.provider`; omit canonical inheritance and do not invent an API key.
+Keep the model alias and documentation aligned if a collision requires renaming.
+
+Validate with the installed V2 parser, reload configuration when idle, and select
+the Qwen preset and xhigh in a new Desktop session. Model defaults and existing
+agent bindings are preserved; selecting Qwen does not make all background or
+delegated requests local. Reapplying the identical fragment should be a no-op.
+
+Do not change the setup helper's `sources.model` merely to add Qwen: that setting
+seeds the root default and all generated agents. Rerunning the helper preserves
+existing live configurations. Fragment edits require another reviewed merge;
+Modelfile edits require a corresponding preset creation as described in the guide.

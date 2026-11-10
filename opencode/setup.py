@@ -9,11 +9,14 @@ import os
 from pathlib import Path
 import stat
 import sys
+import tempfile
 import tomllib
 import uuid
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from setup_files import fingerprint, no_link_parents, write_new
 ROLES = ("bounded_explorer", "mechanical_mapper", "quality_reviewer", "implementation_worker")
 
 
@@ -22,39 +25,6 @@ def absolute(value):
     if not path.is_absolute():
         raise ValueError(f"Expected an absolute path: {value}")
     return path
-
-
-def fingerprint(path):
-    metadata = path.lstat()
-    result = {"device": metadata.st_dev, "inode": metadata.st_ino,
-              "mode": stat.S_IMODE(metadata.st_mode)}
-    if path.is_symlink():
-        result.update(type="symlink", target=os.readlink(path))
-    elif path.is_file():
-        result.update(type="file", sha256=hashlib.sha256(path.read_bytes()).hexdigest())
-    else:
-        raise ValueError(f"Expected file or link: {path}")
-    return result
-
-
-def no_link_parents(path):
-    for parent in (path, *path.parents):
-        if parent.is_symlink():
-            raise ValueError(f"Refusing to write through directory symlink: {parent}")
-        if parent.exists() and not parent.is_dir():
-            raise ValueError(f"Not a directory: {parent}")
-
-
-def write_new(path, text):
-    descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
-    metadata = os.fstat(descriptor)
-    with os.fdopen(descriptor, "w") as output:
-        output.write(text)
-    # A concurrent app replacement must never become setup-owned through a
-    # later pathname lookup. Bind the created inode and intended bytes instead.
-    return {"device": metadata.st_dev, "inode": metadata.st_ino,
-            "mode": stat.S_IMODE(metadata.st_mode), "type": "file",
-            "sha256": hashlib.sha256(text.encode()).hexdigest()}
 
 
 def render_config(home, config_root, sources):
@@ -104,8 +74,7 @@ def render_config(home, config_root, sources):
     for path in protected:
         for candidate in (path, path.resolve()):
             patterns.add(str(candidate))
-            if candidate.is_dir():
-                patterns.add(str(candidate) + "/*")
+            patterns.add(str(candidate) + "/*")
     config["policies"].extend({"action": "tool.use", "resource": "edit:" + pattern, "effect": "deny"}
                               for pattern in sorted(patterns))
     return json.dumps(config, indent=2) + "\n"
@@ -117,20 +86,55 @@ def rollback(manifest_path, dry_run):
         raise ValueError("Unrecognized rollback manifest")
     config_root = absolute(manifest["config_root"])
     no_link_parents(config_root)
-    removed, preserved = [], []
+    entries = []
     for entry in reversed(manifest["created"]):
         path = absolute(entry["path"])
         if path.parent != config_root or path.name not in ("AGENTS.md", "opencode-compat.md", "opencode.jsonc"):
             raise ValueError(f"Rollback path outside setup ownership: {path}")
-        if not os.path.lexists(path):
-            continue
-        if fingerprint(path) != entry["fingerprint"]:
+        entries.append((path, entry["fingerprint"]))
+    removed, preserved, recovery, errors = [], [], [], []
+    recovery_root = None
+    for path, expected in entries:
+        try:
+            if not os.path.lexists(path):
+                continue
+            if fingerprint(path) != expected:
+                preserved.append(str(path))
+                continue
+            if dry_run:
+                removed.append(str(path))
+                continue
+            if recovery_root is None:
+                recovery_root = Path(tempfile.mkdtemp(prefix=".rollback-", dir=config_root))
+            backup = recovery_root / path.name
+            path.rename(backup)
+        except (OSError, ValueError) as error:
             preserved.append(str(path))
+            errors.append({"path": str(path), "error": str(error)})
             continue
-        removed.append(str(path))
-        if not dry_run:
-            path.unlink()
-    return {"removed": removed, "preserved": preserved, "dry_run": dry_run}
+        # The pathname may have changed after inspection. Move first, inspect
+        # the actual entry, and retain it even if an open app descriptor writes
+        # later. Recovery lives on the same filesystem and is never deleted.
+        item = {"path": str(path), "backup": str(backup), "restored": False}
+        recovery.append(item)
+        try:
+            owned = fingerprint(backup) == expected
+        except (OSError, ValueError) as error:
+            owned = False
+            item["inspection_error"] = str(error)
+        if owned:
+            removed.append(str(path))
+            continue
+        preserved.append(str(path))
+        try:
+            # Exclusive creation preserves any newer destination. Keep the
+            # recovery entry too; unsupported hard links require manual recovery.
+            os.link(backup, path, follow_symlinks=False)
+            item["restored"] = True
+        except (OSError, NotImplementedError) as error:
+            item["restore_error"] = str(error)
+    return {"removed": removed, "preserved": preserved, "recovery": recovery,
+            "errors": errors, "dry_run": dry_run}
 
 
 def main():
@@ -198,7 +202,10 @@ def main():
 
 if __name__ == "__main__":
     try:
-        print(json.dumps(main(), indent=2))
+        result = main()
+        print(json.dumps(result, indent=2))
+        if result.get("errors") or any("restore_error" in item for item in result.get("recovery", [])):
+            sys.exit(1)
     except (OSError, ValueError, KeyError, TypeError) as error:
         print(f"OpenCode setup stopped: {error}", file=sys.stderr)
         sys.exit(1)

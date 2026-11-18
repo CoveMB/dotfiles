@@ -47,20 +47,20 @@ backup() {
 
 for name in *; do
   if [ ! -d "$name" ]; then
+    # Scripts and docs are not dotfiles (p10k.zsh links as ~/.p10k.zsh here).
+    case "$name" in
+      *.sh|*.py|*.md) continue ;;
+    esac
     target="$HOME/.$name"
-    if [[ ! "$name" =~ '\.sh$' ]] && [[ "$name" != 'README.md' ]]; then
-      backup $target
+    backup $target
 
-      echo $target
-      if [ ! -e "$target" ]; then
-        echo "-----> Symlinking your new $target"
-        ln -s "$PWD/$name" "$target"
-      fi
+    echo $target
+    if [ ! -e "$target" ]; then
+      echo "-----> Symlinking your new $target"
+      ln -s "$PWD/$name" "$target"
     fi
   fi
 done
-
-ln -s "$PWD/.p10k.zsh" "~/"
 
 DOTFILES_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 "$DOTFILES_ROOT/setup-codex.sh"

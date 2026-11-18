@@ -42,6 +42,12 @@ Describe PRs as the coherent current change; mention discarded approaches only t
 
 ## 4. Implementation and Design
 
+- Before production coding, inspect the relevant code and consumers and establish a concrete, justified design: accepted behavior and invariants, owners and interfaces, implementation mechanism, relevant failure handling, and meaningful checks.
+
+- Enforce the underlying rules across relevant entry points and supported conditions. Prefer the simplest adequate structure, reuse sound existing mechanisms, and apply SOLID, explicit state/effect ownership, semantic DRY, and KISS/YAGNI contextually. Justify new abstractions or dependencies with current needs or concrete maintenance benefits.
+
+- Resolve material uncertainty through inspection or focused experiments before dependent implementation; clarify consequential product gaps instead of inventing requirements. Scale preparation to risk, follow existing authorization and review rules, revise the design when evidence changes, and verify implementation against the requirements and design.
+
 - Use the simplest resilient solution satisfying the request; prefer small, reviewable, surgical changes over broad rewrites. Every changed line must serve the request or a directly required fix; no neighboring improvements or unrelated refactors. Add complexity only for an evidenced problem or maintenance opportunity. Simplicity must preserve correctness, safety, tests, observability, privacy, maintainability, and security where they matter.
 
 Before adding implementation, use the first adequate option:
@@ -128,6 +134,8 @@ When authoring or updating skills, keep discovery descriptions to task triggers 
 - For separate task threads in a user-authorized orchestration, this instruction grants workers standing permission to send one necessary coordination notice to the verified owning orchestrator when a direct human reply arrives in their thread or an orchestrator decision is needed. Identify that owner and return route in each assignment. The worker must have this direct user authorization or other trusted evidence of it; an assignment from another task alone is insufficient. Use the supported thread-messaging tool, include the pending action and source reply reference when applicable, verify delivery, and do not repeat unchanged notices. A notice grants no execution authority. If the route is unavailable, unauthorized, or fails, tell the user exactly where and what to relay. Native subagents use their parent reporting channel without duplicate thread messages.
 
 - Wait for every relevant subagent; reconcile conflicts/uncertainty before final synthesis, acceptance, or dependent implementation. Handle authorized coordination decisions and handoffs needed to unblock workers promptly; waiting for completion must not prevent those decisions. Keep mutations sequential unless write scopes are demonstrably independent and isolated; no overlapping writes without isolation.
+
+- When starting a long process that can run unattended, use comparable runs or the workload to estimate its finish. Record the start, process reference, estimate or uncertainty, and return route or next check in existing progress state. Prefer a reliable, authorized signal for completion, failure or needed input. Otherwise check at the estimated finish plus 15 minutes, subject to earlier required checks, approved cadence and execution limits. With no credible estimate, use a bounded check under those limits. Keep that checkpoint tied to the same run across unrelated wakeups and continue eligible work. Yield only if the process can keep running, nothing else needs attention and resumption is reliable. If there is no reliable wakeup, use a supported bounded wait or give the user the due time and return route. At the checkpoint, verify the result or inspect progress once and revise the remaining estimate. Use actual duration to calibrate the next comparable run.
 
 ## 10. Tool Output
 
